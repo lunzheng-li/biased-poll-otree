@@ -1,0 +1,15 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    This a simple survey, please enter your information
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.name label="Enter your name" %}
+    {% formfield player.age label="Enter your age" %}
+
+    {% next_button %}
+
+{% endblock %}
