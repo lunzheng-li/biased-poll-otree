@@ -105,7 +105,15 @@ SESSION_CONFIGS = [
         'display_name': 'A simple survey',
         'num_demo_participants': 3,
         'app_sequence': ['Li_survey'],
-    }
+
+    },
+    {
+        'name': 'my_public_goods',
+        'display_name': 'A simple public goods game',
+        'num_demo_participants': 3,
+        'app_sequence': ['my_public_goods'],
+
+    },
 ]
 
 # anything you put after the below line will override
