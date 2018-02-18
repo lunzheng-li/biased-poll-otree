@@ -114,6 +114,12 @@ SESSION_CONFIGS = [
         'app_sequence': ['my_public_goods'],
 
     },
+    {
+        'name': 'my_trust',
+        'display_name': "simple trust Game",
+        'num_demo_participants': 2,
+        'app_sequence': ['my_trust'],
+    },
 ]
 
 # anything you put after the below line will override
