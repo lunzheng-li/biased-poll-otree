@@ -120,6 +120,12 @@ SESSION_CONFIGS = [
         'num_demo_participants': 2,
         'app_sequence': ['my_trust'],
     },
+    {
+        'name': 'polls',
+        'display_name': "simple poll",
+        'num_demo_participants': 2,
+        'app_sequence': ['polls'],
+    },
 ]
 
 # anything you put after the below line will override

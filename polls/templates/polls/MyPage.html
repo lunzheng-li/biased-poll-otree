@@ -1,0 +1,13 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    General Information
+{% endblock %}
+
+{% block content %}
+    <p>Your ideological position is {{ player.id_position }}. Candidate J's quality is {{ Constants.quality_J }}
+    and candidate K's quality is {{ Constants.quality_K }}</p>
+    {% next_button %}
+
+{% endblock %}
