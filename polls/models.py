@@ -35,6 +35,12 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     id_position = models.StringField(initial = random.randint(1, 15)) # I need different participant have different id_position, however, this is not working.
-    poll = models.StringField()
-    vote = models.StringField()
+    poll = models.StringField(
+        choices=['J', 'K'],
+        widget=widgets.RadioSelect
+    )
+    vote = models.StringField(
+        choices=['J', 'K'],
+        widget=widgets.RadioSelect
+    )
     pass

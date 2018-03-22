@@ -2,11 +2,11 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    Page title
+    Poll
 {% endblock %}
 
 {% block content %}
-    {% formfield player.poll label=". Please state for which candidate you intend to vote " %}
+    {% formfield player.poll label="Please state for which candidate you intend to vote " %}
     {% next_button %}
 {% endblock %}
 

@@ -3,19 +3,31 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class MyPage(Page):
+class Information(Page):
     form_model = 'player'
     pass
 
-
-
-class Results(Page):
+class Poll(Page):
     form_model = 'player'
     form_fields = ['poll']
     pass
 
+class PollResult(Page):
+    pass
+
+class Vote(Page):
+    form_model = 'player'
+    form_fields = ['vote']
+    pass
+
+class FinalResult(Page):
+    pass
+
 
 page_sequence = [
-    MyPage,
-    Results
+    Information,
+    Poll,
+    PollResult,
+    Vote,
+    FinalResult
 ]

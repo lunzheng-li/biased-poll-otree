@@ -1,0 +1,13 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Final Result
+{% endblock %}
+
+{% block content %}
+    <p>The winning party is ...
+    and you payoff would be ...</p>
+    {% next_button %}
+
+{% endblock %}

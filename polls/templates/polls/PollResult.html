@@ -1,0 +1,13 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Poll Result
+{% endblock %}
+
+{% block content %}
+    <p>Let's first try put everyone's preference here. Subject 1 state that he support candidate K, Subject 2 states that ... etc.
+    then, I guess we can try to get the percentage</p>
+    {% next_button %}
+
+{% endblock %}

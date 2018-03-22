@@ -1,0 +1,13 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Vote
+{% endblock %}
+
+{% block content %}
+    {% formfield player.vote label="Please vote for one of the candidates " %}
+    {% next_button %}
+{% endblock %}
+
+
