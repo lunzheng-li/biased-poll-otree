@@ -2,12 +2,11 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    The Poll
+    Your ideological position
 {% endblock %}
 
 {% block content %}
-    {% formfield player.poll label="Please state for which candidate you intend to vote " %}
+    <p>Your ideological position is {{ player.id_position }}. </p>
     {% next_button %}
+
 {% endblock %}
-
-

@@ -3,8 +3,11 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class Information(Page):
+class Ideology(Page):
     form_model = 'player'
+    pass
+
+class Informed(Page):
     pass
 
 class Poll(Page):
@@ -14,7 +17,7 @@ class Poll(Page):
 
 class PollWaitpage(WaitPage):
     def after_all_players_arrive(self):
-        self.group.set_portion()
+        self.group.set_payoff()
     pass
 
 class PollResult(Page):
@@ -27,7 +30,7 @@ class Vote(Page):
 
 class VoteWaitpage(WaitPage):
     def after_all_players_arrive(self):
-        self.group.set_portion()
+        self.group.set_payoff()
     pass
 
 class FinalResult(Page):
@@ -35,7 +38,8 @@ class FinalResult(Page):
 
 
 page_sequence = [
-    Information,
+    Ideology,
+    Informed,
     Poll,
     PollWaitpage,
     PollResult,

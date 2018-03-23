@@ -14,6 +14,11 @@ page 2: polling (input)
 page 3: present the poll result
 page 4: voting (input)
 page 5: results and payoffs
+
+general information:
+J is in ideological position 6 and candidate of Party K is in ideological position 10
+id_value_J = 100 - 5 * abs(6 - id_position)
+id_value_K = 100 - 5 * abs(10 - id_position)
 """
 
 
@@ -37,25 +42,25 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     k_inpolls = models.FloatField()
     winner = models.StringField()
-    def set_portion(self):
+    def set_payoff(self):
         players = self.get_players()
         polls = [p.poll for p in players]
-        num_k = 0
-        for i in polls:
-            if i == 'K':
-                num_k += 1
-        self.k_inpolls = num_k / len(polls) # I am try put this in PollResult.html, however, nothing.
+        k_poll = polls.count("K")
+        self.k_inpolls = k_poll / len(polls) # I am try put this in PollResult.html, however, nothing.
                                             # now solved, we need define a var outside the scopes of set_portion function
                                             # Then in the html file, use group.k_inpolls, rather than group
-    # def set_payoff(self): # if put those things in different functions, it won't work. In most cases, we just define one function under this class
-        players = self.get_players()
+    # def set_payoff_2(self): # if put those things in different functions, it won't work. In most cases, we just define one function under this class
         votes = [p.vote for p in players]
         k_vote = votes.count("K")
         j_vote = votes.count("J")
         if k_vote > j_vote:
             self.winner = "K"
+            for p in players:
+                p.payoff = Constants.quality_K + 100 - 5 * abs(10 - p.id_position)
         else:
             self.winner = "J"
+            for p in players:
+                p.payoff = Constants.quality_J + 100 - 5 * abs(6 - p.id_position)
 
     pass
 
