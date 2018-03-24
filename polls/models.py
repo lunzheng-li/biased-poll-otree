@@ -19,6 +19,11 @@ general information:
 J is in ideological position 6 and candidate of Party K is in ideological position 10
 id_value_J = 100 - 5 * abs(6 - id_position)
 id_value_K = 100 - 5 * abs(10 - id_position)
+
+The above simple version is accomplished, let's focus on the polling part. We have 3 subjects now, let's say we have two companies, 
+and each of randomly select two subjects.
+Some questions: Do subjects know which company they are answering to? Do they know which company's poll is revealled to them?
+Do know how many companies are there?
 """
 
 

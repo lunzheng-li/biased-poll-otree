@@ -6,8 +6,16 @@ from .models import Constants
 class Ideology(Page):
     form_model = 'player'
     pass
-
+# Participants with ideological positions {1,2,3,5,7,9, 11,13} are informed.
 class Informed(Page):
+    def is_displayed(self):
+        return self.player.id_position in [1,2,3,5,7,9, 11,13]
+    pass
+
+#Participants with ideological positions {4,6,8,10,12,14,15 } are uninformed.
+class Uninformed(Page):
+    def is_displayed(self):
+        return self.player.id_position in [4,6,8,10,12,14,15]
     pass
 
 class Poll(Page):
@@ -40,6 +48,7 @@ class FinalResult(Page):
 page_sequence = [
     Ideology,
     Informed,
+    Uninformed,
     Poll,
     PollWaitpage,
     PollResult,
