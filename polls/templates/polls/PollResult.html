@@ -2,12 +2,12 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    Poll Result
+    Poll Result: The proportion of favouring candidate K
 {% endblock %}
 
 {% block content %}
-    <p>The proportion of favouring candidate K: {{ group.k_inpolls}}
-    </p>
+    <p> Company 1: {{ group.company1_k_inpolls }}.</p>
+    <p> Company 2: {{ group.company2_k_inpolls }}.</p>
     {% next_button %}
 
 {% endblock %}

@@ -18,6 +18,10 @@ class Uninformed(Page):
         return self.player.id_position in [4,6,8,10,12,14,15]
     pass
 
+class SelectWaitpage(WaitPage): # We need this waiting pages, so companies can randomly select subjects. but can we get get rid of this waiting page?
+    def after_all_players_arrive(self):
+        self.group.set_payoff()
+
 class Poll(Page):
     form_model = 'player'
     form_fields = ['poll']
@@ -49,6 +53,7 @@ page_sequence = [
     Ideology,
     Informed,
     Uninformed,
+    SelectWaitpage,
     Poll,
     PollWaitpage,
     PollResult,

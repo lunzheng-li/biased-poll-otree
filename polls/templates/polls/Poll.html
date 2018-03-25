@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block content %}
+    <p>You have randomly been selected to participate in the polls of Company{{ player.company_each_player }}.  </p>
+     <p>{{ group.Allcompany }}</p>
     {% formfield player.poll label="Please state for which candidate you intend to vote " %}
     {% next_button %}
 {% endblock %}
