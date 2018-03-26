@@ -25,8 +25,14 @@ class SelectWaitpage(WaitPage): # We need this waiting pages, so companies can r
 class Poll(Page):
     form_model = 'player'
     form_fields = ['poll']
+    def is_displayed(self):
+        return self.player.company_each_player != "None"
     pass
 
+class PollNone(Page):
+    def is_displayed(self):
+        return self.player.company_each_player == "None"
+    pass
 class PollWaitpage(WaitPage):
     def after_all_players_arrive(self):
         self.group.set_payoff()
@@ -55,6 +61,7 @@ page_sequence = [
     Uninformed,
     SelectWaitpage,
     Poll,
+    PollNone,
     PollWaitpage,
     PollResult,
     Vote,

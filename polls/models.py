@@ -133,7 +133,7 @@ class Group(BaseGroup):
                         printout = printout + " 2"
                     self.get_player_by_id(i).company_each_player = printout
             else:
-                self.get_player_by_id(i).company_each_player = " None"
+                self.get_player_by_id(i).company_each_player = "None"
 
 
 
