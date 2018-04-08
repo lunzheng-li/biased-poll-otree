@@ -2,12 +2,12 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    Information
+
 {% endblock %}
 
 {% block content %}
-    <p>Candidate J's quality is {{ Constants.quality_J }}
-    and candidate K's quality is {{ Constants.quality_K }}</p>
+    <p>For this period the quality of Candidate J is  {{ Constants.quality_J }}
+    and the quality of candidate K is {{ Constants.quality_K }}</p>
     {% next_button %}
-
+ {% include Constants.instructions_template %}
 {% endblock %}

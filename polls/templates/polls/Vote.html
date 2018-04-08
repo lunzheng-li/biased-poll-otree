@@ -2,12 +2,18 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    Vote
+
 {% endblock %}
 
 {% block content %}
-    {% formfield player.vote label="Please vote for one of the candidates " %}
+    <p>Now elections will take place.</p>
+    <p>The candidate that receives the majority of votes will be elected.</p>
+            <h4 class="panel-sub-heading">
+            Elections
+        </h4>
+    {% formfield player.vote label="Please state your choice:" %}
     {% next_button %}
+     {% include Constants.instructions_template %}
 {% endblock %}
 
 

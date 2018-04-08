@@ -2,11 +2,11 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    Information
+
 {% endblock %}
 
 {% block content %}
-    <p>You are an uninformed voter</p>
+    <p>For this period you will be uninformed of the quality values of the two candidates.</p>
     {% next_button %}
-
+ {% include Constants.instructions_template %}
 {% endblock %}

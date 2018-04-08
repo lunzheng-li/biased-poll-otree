@@ -2,15 +2,31 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
+
+# # # In the poll part, a subject is probably answering to more one companies. I tried to think it as a "list of companies",
+# # # therefore, tried to import a list field. Howeer, it not working.
+# # # We have some other solutions:
+# # # 1. set up a string field and convert the list to string, then put the string to the field
+# # # 2. Or simply use a boolean condition. 
+# # # if list = [company 1, company 2]
+    # # # StringField = "company1 and company2"
 #from django.db.models import CharField, Model
-#from django_mysql.models import ListCharField #  No module named 'django_mysql', The MySQL-python module does not support Python 3.x:
-# http://django-mysql.readthedocs.io/en/latest/model_fields/list_fields.html
+#from django_mysql.models import ListCharField 
+# # # No module named 'django_mysql', The MySQL-python module does not support Python 3.x:
+# # # http://django-mysql.readthedocs.io/en/latest/model_fields/list_fields.html
 
 import random
 
 author = 'Lunzheng Li'
 
 doc = """
+
+General information:
+J is in ideological position 6 and candidate of Party K is in ideological position 10
+id_value_J = 100 - 5 * abs(6 - id_position)
+id_value_K = 100 - 5 * abs(10 - id_position)
+
+simple version 
 Let start with a very simple version. Everyone is informed, there is only one company, and everyone see the whole poll result.
 It has 5 pages: 
 page 1: present ideological position and candidate quality
@@ -19,15 +35,29 @@ page 3: present the poll result
 page 4: voting (input)
 page 5: results and payoffs
 
-general information:
-J is in ideological position 6 and candidate of Party K is in ideological position 10
-id_value_J = 100 - 5 * abs(6 - id_position)
-id_value_K = 100 - 5 * abs(10 - id_position)
-
 The above simple version is accomplished, let's focus on the poll part. We have 3 subjects now, let's say we have two companies, 
 and each of randomly select two subjects.
-Some questions: Do subjects know which company they are answering to? Do they know which company's poll is revealled to them?
+Some questions: Do subjects know which company they are answering to? Do they know which company's poll is revealed to them?
 Do they know how many companies are there?
+the answers: yes, no, yes
+
+second version (26/03) one group, one session 
+page1. Your ideological position, everyone has different id_position
+page2. Subjects are either informed or not informed according to id_position
+page3. There is wait page.Companies randomly select participants. 
+page4. The poll
+page5. wait page
+page6. Poll result
+page7. election
+page8. winner and payoffs.
+
+further steps:
+1. multiple groups, and multiple sessions (15 players per group, 30 rounds)
+2. 5 companies, 4 random selections
+3. Screen display, instruction
+4. page3 is redundant 
+5. page6 biased poll
+
 """
 
 
@@ -37,30 +67,31 @@ class Constants(BaseConstants):
     num_rounds = 1
     quality_J = random.randint(1,40)
     quality_K = random.randint(1, 40)
-    # There are always 2 poll companies. It seems that we should define this in Group. But I think it will work here.
-    Companies = ['company 1', 'company 2' ] # I haven't used this lst yett, but I think when we have more companies, it might be helpful to loop the lst.
+    # # # # There are always 2 poll companies. It seems that we should define this in Group. But I think it will work here.
+    # # # Companies = ['company 1', 'company 2' ] # I haven't used this lst yet, but I think when we have more companies, it might be helpful to loop the lst.
 
+    instructions_template = 'polls/Instructions.html' # everytime when adding a var in model.py, reset the database.
     pass
 
 
 class Subsession(BaseSubsession):
     def creating_session(self):
-        # randomize to treatments
+        # # # randomize to treatments
         for player in self.get_players():
             player.id_position = random.randint(1, 15)
-            player.company = random.randint(1,2) # players are allocated to a company at the beginning of the session.
+            # # # player.company = random.randint(1,2) # players are allocated to a company at the beginning of the session.
     pass
 
 
 class Group(BaseGroup):
-    k_inpolls = models.FloatField()
-    winner = models.StringField()
+    k_inpolls = models.FloatField()# fraction of supporting K in whole poll
+    winner = models.StringField()# the elected party
 
-    # link subject's  preference back to companies.
+    # # # link subject's  preference back to companies.
     company1_k_inpolls = models.FloatField()
     company2_k_inpolls = models.FloatField()
 
-    Allcompany = models.StringField()
+    Allcompany = models.StringField()# it's actually not needed, I just want to print it out to check
 
 
 
@@ -90,9 +121,10 @@ class Group(BaseGroup):
         self.k_inpolls = k_poll / len(polls) # I am try put this in PollResult.html, however, nothing.
                                             # now solved, we need define a var outside the scopes of set_portion function
                                             # Then in the html file, use group.k_inpolls, rather than group
+                                            
     # def set_payoff_2(self): # if put those things in different functions, it won't work. In most cases, we just define one function under this class
 
-        # find out who is the winner.
+        # # #  the winner and payoffs
         votes = [p.vote for p in players]
         k_vote = votes.count("K")
         j_vote = votes.count("J")
@@ -105,11 +137,13 @@ class Group(BaseGroup):
             for p in players:
                 p.payoff = Constants.quality_J + 100 - 5 * abs(6 - p.id_position)
 
-        # # # star over, the poll part
+        # # # the poll part
         company1 = random.sample(range(1, len(players)+1), 2)
         company2 = random.sample(range(1, len(players)+1), 2)
         Allcompany = company1 + company2
-        self.Allcompany = ",".join(str(e) for e in Allcompany)
+        
+        self.Allcompany = ",".join(str(e) for e in Allcompany) # actually not needed, to print it out
+        
         # # # The following codes of select subjects is dumb and is very likely to be wrong
         # for i in range(1, len(players)+1):
         #     if i in company1 and i in company2:
@@ -121,6 +155,7 @@ class Group(BaseGroup):
         #     else:
         #         self.get_player_by_id(i).company_each_player = "Please wait"
 
+        
         # # # Let's try another way, it seems that this is working
         for i in range(1, len(players)+1):
             if i in Allcompany:
@@ -136,7 +171,7 @@ class Group(BaseGroup):
                 self.get_player_by_id(i).company_each_player = "None"
 
 
-
+        # # #  fraction of supporting K in each company poll
         k_company1 = 0
         k_company2 = 0
         for i in company1:
@@ -151,17 +186,14 @@ class Group(BaseGroup):
             else:
                 pass
         self.company1_k_inpolls = k_company1/2 # each company sample 2
-        self.company2_k_inpolls = k_company2 / 2 # The numbers are wrong, there is something wrong here, probably start from the part
-                                                # which companies selects subjects.
-        # more test needed, it seems that the numbers are right sometimes.
-
-
+        self.company2_k_inpolls = k_company2 / 2 # need more tests on the numbers. If wrong, " Let's try another way, it seems that this is working" part might have problem.
     pass
 
 
 class Player(BasePlayer):
-    #id_position = models.StringField(initial = random.randint(1, 15)) # I need different participant have different id_position, however, this is not working.
-    # OK, using creating_session in Subsession solved this problem.
+    # # # id_position = models.StringField(initial = random.randint(1, 15)) # I need different participant have different id_position, however, this is not working.
+    # # # OK, using creating_session in Subsession solved this problem.
+    
     id_position = models.IntegerField()
     poll = models.StringField(
         choices=['J', 'K'],
@@ -171,11 +203,13 @@ class Player(BasePlayer):
         choices=['J', 'K'],
         widget=widgets.RadioSelect
     )
-    # company = models.IntegerField()# each participant is randomly allocate to a company, companies are label using numbers. Seems that it won't work since some subjects might be assigned to
-                                # more than one company
+    
+    # # # company = models.IntegerField()
+    # # # each participant is randomly allocate to a company, companies are label using numbers. Seems that it won't work since some subjects might be assigned to
+    # # # more than one company
 
-    # the poll part.
-    # every player has a method of companies which contains the companies he is answering to
-    # companies is string field, the general idea would we get a list first then convert it to strings
+    # # # the poll part.
+    # every player has model of company_each_player  which contains the companies he is answering to
+    # # # companies is string field, the general idea would we get a list first then convert it to strings
     company_each_player = models.StringField()
     pass

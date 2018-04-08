@@ -2,11 +2,11 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    Your ideological position
+
 {% endblock %}
 
 {% block content %}
-    <p>Your ideological position is {{ player.id_position }}. </p>
+    <p>Your position for this round is position {{ player.id_position }}. </p>
     {% next_button %}
-
+ {% include Constants.instructions_template %}
 {% endblock %}

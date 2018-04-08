@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+
+{% block title %}
+Instructions
+
+{% endblock %}
+
+{% block content %}
+
+    {% include Constants.instructions_template %}
+
+    <p>
+        <strong>
+            The first practice round will now start.
+        </strong>
+    </p>
+    <p><strong>
+       Please remember that you are not allowed to talk or communicate in any other way during this study.
+        If you have any questions during the study please raise your hand and your questions will be answered individually.
+     </strong></p>
+    <p><strong>
+        The instructions will remain on your screen for future reference.
+    </strong></p>
+
+    {% next_button %}
+
+
+
+{% endblock %}

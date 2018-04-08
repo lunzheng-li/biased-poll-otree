@@ -2,6 +2,8 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
+class Introduction(Page):
+    timeout_seconds = 6000
 
 class Ideology(Page):
     form_model = 'player'
@@ -56,6 +58,7 @@ class FinalResult(Page):
 
 
 page_sequence = [
+    Introduction, # remember to add the page in the page sequence.
     Ideology,
     Informed,
     Uninformed,

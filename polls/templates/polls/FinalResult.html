@@ -2,12 +2,17 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    Final Result
+
 {% endblock %}
 
 {% block content %}
-    <p>The winning party is {{ group.winner }}
-    and your payoff is {{ player.payoff }}</p>
+                <h4 class="panel-sub-heading">
+            ELECTION RESULTS:
+        </h4>
+    <p><li>X1%                 voted for Candidate J</li>
+    <li>1-X1%                 voted for Candidate K</li></p>
+    <p>{{ group.winner }} wins </p>
+    <p>Your points earned in this round: {{ player.payoff }}</p>
     {% next_button %}
 
 {% endblock %}
