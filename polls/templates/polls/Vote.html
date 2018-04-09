@@ -2,15 +2,13 @@
 {% load staticfiles otree %}
 
 {% block title %}
-
+         Elections
 {% endblock %}
 
 {% block content %}
+  <p><ins>Round {{ group.round_number }} of {{ Constants.num_rounds }}</ins></p>
     <p>Now elections will take place.</p>
     <p>The candidate that receives the majority of votes will be elected.</p>
-            <h4 class="panel-sub-heading">
-            Elections
-        </h4>
     {% formfield player.vote label="Please state your choice:" %}
     {% next_button %}
      {% include Constants.instructions_template %}

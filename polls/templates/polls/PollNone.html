@@ -2,10 +2,11 @@
 {% load staticfiles otree %}
 
 {% block title %}
-
+Polls
 {% endblock %}
 
 {% block content %}
+  <p><ins>Round {{ group.round_number }} of {{ Constants.num_rounds }}</ins></p>
     <p>In this period you were <strong>not</strong> randomly selected to participate in a poll. </p>
     <p>Please wait while others participate in the polls.</p>
     <!--<p>Companies select the following player:{{ group.Allcompany }}. For instance, [3,2,2,1] means company 1 select player 3 and player 2, and company 2 select player 2 and player 1.

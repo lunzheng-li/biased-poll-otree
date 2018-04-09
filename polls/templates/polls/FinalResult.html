@@ -2,17 +2,15 @@
 {% load staticfiles otree %}
 
 {% block title %}
-
+Election results and Payoffs
 {% endblock %}
 
 {% block content %}
-                <h4 class="panel-sub-heading">
-            ELECTION RESULTS:
-        </h4>
-    <p><li>X1%                 voted for Candidate J</li>
-    <li>1-X1%                 voted for Candidate K</li></p>
-    <p>{{ group.winner }} wins </p>
-    <p>Your points earned in this round: {{ player.payoff }}</p>
+     <p><ins>Round {{ group.round_number }} of {{ Constants.num_rounds }}</ins></p>
+    <p><li>{{ group.j_inelection }}&#37; &nbsp;               voted for Candidate J</li>
+    <li>{{ group.k_inelection }}&#37;  &nbsp;              voted for Candidate K</li></p>
+    <p><strong>Candidate {{ group.winner }}</strong> wins </p>
+    <p>Your points earned in this round: <strong>{{ player.payoff }}</strong></p>
     {% next_button %}
 
 {% endblock %}

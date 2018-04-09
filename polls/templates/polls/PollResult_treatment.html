@@ -2,12 +2,14 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    Candidate Quality
+    This is the poll result page for treatment group
 {% endblock %}
 
 {% block content %}
   <p><ins>Round {{ group.round_number }} of {{ Constants.num_rounds }}</ins></p>
-    <p>For this period you will be <strong>uninformed</strong> of the quality values of the two candidates.</p>
+    <p>This is the poll result page for treatment group</p>
+    <p>This is the poll result page for treatment group</p>
     {% next_button %}
- {% include Constants.instructions_template %}
+     {% include Constants.instructions_template %}
+
 {% endblock %}

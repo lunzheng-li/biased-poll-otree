@@ -4,7 +4,9 @@ from .models import Constants
 
 class Introduction(Page):
     timeout_seconds = 6000
-
+    # how to only display this page only in round one, the only way I can think of is to make to apps
+    def is_displayed(self):
+        return self.player.round_number == 1
 class Ideology(Page):
     form_model = 'player'
     pass
@@ -41,6 +43,13 @@ class PollWaitpage(WaitPage):
     pass
 
 class PollResult(Page):
+    def is_displayed(self):
+        return self.player.participant.vars['treatment'] == 0
+    pass
+
+class PollResult_treatment(Page):
+    def is_displayed(self):
+        return self.player.participant.vars['treatment'] == 1
     pass
 
 class Vote(Page):
@@ -67,6 +76,7 @@ page_sequence = [
     PollNone,
     PollWaitpage,
     PollResult,
+    PollResult_treatment,
     Vote,
     PollWaitpage,
     FinalResult

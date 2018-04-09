@@ -2,12 +2,13 @@
 {% load staticfiles otree %}
 
 {% block title %}
-
+    Candidate Quality
 {% endblock %}
 
 {% block content %}
-    <p>For this period the quality of Candidate J is  {{ Constants.quality_J }}
-    and the quality of candidate K is {{ Constants.quality_K }}</p>
+    <p><ins>Round {{ group.round_number }} of {{ Constants.num_rounds }}</ins></p>
+    <p>For this period the quality of <strong>Candidate J is  {{ group.quality_J }}</strong>
+        and the quality of <strong>Candidate K is {{ group.quality_K }}</strong></p>
     {% next_button %}
  {% include Constants.instructions_template %}
 {% endblock %}

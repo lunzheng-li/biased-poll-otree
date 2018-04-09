@@ -64,13 +64,13 @@ further steps:
 class Constants(BaseConstants):
     name_in_url = 'polls'
     players_per_group = None
-    num_rounds = 1
-    quality_J = random.randint(1,40)
-    quality_K = random.randint(1, 40)
+    num_rounds = 2
+
     # # # # There are always 2 poll companies. It seems that we should define this in Group. But I think it will work here.
     # # # Companies = ['company 1', 'company 2' ] # I haven't used this lst yet, but I think when we have more companies, it might be helpful to loop the lst.
 
     instructions_template = 'polls/Instructions.html' # everytime when adding a var in model.py, reset the database.
+
     pass
 
 
@@ -80,16 +80,30 @@ class Subsession(BaseSubsession):
         for player in self.get_players():
             player.id_position = random.randint(1, 15)
             # # # player.company = random.randint(1,2) # players are allocated to a company at the beginning of the session.
+        if self.round_number == 1:
+                for p in self.get_players():
+                    p.participant.vars['treatment'] = random.randint(0,1)
+        for group in self.get_groups():
+            group.quality_J = random.randint(1, 40)
+            group.quality_K = random.randint(1, 40)
     pass
 
 
 class Group(BaseGroup):
+    quality_J = models.IntegerField() # every var need to displayed need a model field
+    quality_K = models.IntegerField()
+
     k_inpolls = models.FloatField()# fraction of supporting K in whole poll
     winner = models.StringField()# the elected party
+    k_inelection = models.FloatField()# fraction of supporting K in election.
+    j_inelection = models.FloatField()# fraction of supporting J in election.
+
 
     # # # link subject's  preference back to companies.
     company1_k_inpolls = models.FloatField()
     company2_k_inpolls = models.FloatField()
+    company1_j_inpolls = models.FloatField()
+    company2_j_inpolls = models.FloatField()
 
     Allcompany = models.StringField()# it's actually not needed, I just want to print it out to check
 
@@ -131,11 +145,13 @@ class Group(BaseGroup):
         if k_vote > j_vote:
             self.winner = "K"
             for p in players:
-                p.payoff = Constants.quality_K + 100 - 5 * abs(10 - p.id_position)
+                p.payoff = self.quality_K + 100 - 5 * abs(10 - p.id_position)
         else:
             self.winner = "J"
             for p in players:
-                p.payoff = Constants.quality_J + 100 - 5 * abs(6 - p.id_position)
+                p.payoff = self.quality_J + 100 - 5 * abs(6 - p.id_position)
+        self.k_inelection = round(k_vote/len(players)*100, 2) # show percentage
+        self.j_inelection = round(j_vote/len(players)*100, 2)
 
         # # # the poll part
         company1 = random.sample(range(1, len(players)+1), 2)
@@ -185,15 +201,17 @@ class Group(BaseGroup):
                 k_company2 += 1
             else:
                 pass
-        self.company1_k_inpolls = k_company1/2 # each company sample 2
-        self.company2_k_inpolls = k_company2 / 2 # need more tests on the numbers. If wrong, " Let's try another way, it seems that this is working" part might have problem.
+        self.company1_k_inpolls = round(k_company1/2*100, 2) # each company sample 2
+        self.company1_j_inpolls = 100-self.company1_k_inpolls
+        self.company2_k_inpolls = round(k_company2/2 *100, 2)# need more tests on the numbers. If wrong, " Let's try another way, it seems that this is working" part might have problem.
+        self.company2_j_inpolls = 100 - self.company2_k_inpolls
     pass
 
 
 class Player(BasePlayer):
     # # # id_position = models.StringField(initial = random.randint(1, 15)) # I need different participant have different id_position, however, this is not working.
     # # # OK, using creating_session in Subsession solved this problem.
-    
+    # treatment = models.IntegerField() # this subject is in treatment group (two poll are reaveled ) or in control group
     id_position = models.IntegerField()
     poll = models.StringField(
         choices=['J', 'K'],
@@ -203,7 +221,7 @@ class Player(BasePlayer):
         choices=['J', 'K'],
         widget=widgets.RadioSelect
     )
-    
+
     # # # company = models.IntegerField()
     # # # each participant is randomly allocate to a company, companies are label using numbers. Seems that it won't work since some subjects might be assigned to
     # # # more than one company

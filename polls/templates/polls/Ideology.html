@@ -2,11 +2,12 @@
 {% load staticfiles otree %}
 
 {% block title %}
-
+    Ideological Positions
 {% endblock %}
 
 {% block content %}
-    <p>Your position for this round is position {{ player.id_position }}. </p>
+    <p><ins>Round {{ group.round_number }} of {{ Constants.num_rounds }}</ins></p>
+    <p>Your position for this round is <strong>position {{ player.id_position }}</strong>. </p>
     {% next_button %}
  {% include Constants.instructions_template %}
 {% endblock %}
