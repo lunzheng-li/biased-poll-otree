@@ -67,25 +67,33 @@ class Constants(BaseConstants):
     num_rounds = 2
 
     # # # # There are always 2 poll companies. It seems that we should define this in Group. But I think it will work here.
-    # # # Companies = ['company 1', 'company 2' ] # I haven't used this lst yet, but I think when we have more companies, it might be helpful to loop the lst.
+   # Companies = ['A', 'B', 'C', 'D', 'E']
 
     instructions_template = 'polls/Instructions.html' # everytime when adding a var in model.py, reset the database.
-
     pass
 
 
 class Subsession(BaseSubsession):
     def creating_session(self):
         # # # randomize to treatments
-        for player in self.get_players():
-            player.id_position = random.randint(1, 15)
-            # # # player.company = random.randint(1,2) # players are allocated to a company at the beginning of the session.
         if self.round_number == 1:
                 for p in self.get_players():
                     p.participant.vars['treatment'] = random.randint(0,1)
+                    #  why we need participant.vars, how about just use model in player, this is not working, in the second round, treatment is None
+                    # p.treatment = random.randint(0,1)
+        for player in self.get_players():
+            player.id_position = random.randint(1, 15)
+            # # # player.company = random.randint(1,2) # players are allocated to a company at the beginning of the session.
+
+            # if player.participant.vars['treatment'] == 0: # this seems creates a infinte loop, jumpping from player 1 and player 2, the 3rd player can not join
+            #     player.instruction_num = 'five'
+            # else:
+            #     player.instruction_num = 'two'
+
         for group in self.get_groups():
             group.quality_J = random.randint(1, 40)
             group.quality_K = random.randint(1, 40)
+
     pass
 
 
@@ -95,19 +103,26 @@ class Group(BaseGroup):
 
     k_inpolls = models.FloatField()# fraction of supporting K in whole poll
     winner = models.StringField()# the elected party
+
     k_inelection = models.FloatField()# fraction of supporting K in election.
     j_inelection = models.FloatField()# fraction of supporting J in election.
+    a_inelection = models.FloatField() # fraction of abstain in election, actually we dont need it we do not want to print it out
 
 
     # # # link subject's  preference back to companies.
-    company1_k_inpolls = models.FloatField()
-    company2_k_inpolls = models.FloatField()
-    company1_j_inpolls = models.FloatField()
-    company2_j_inpolls = models.FloatField()
+    companyA_k_inpolls = models.FloatField()
+    companyB_k_inpolls = models.FloatField()
+    companyC_k_inpolls = models.FloatField()
+    companyD_k_inpolls = models.FloatField()
+    companyE_k_inpolls = models.FloatField()
+
+    companyA_j_inpolls = models.FloatField()
+    companyB_j_inpolls = models.FloatField()
+    companyC_j_inpolls = models.FloatField()
+    companyD_j_inpolls = models.FloatField()
+    companyE_j_inpolls = models.FloatField()
 
     Allcompany = models.StringField()# it's actually not needed, I just want to print it out to check
-
-
 
     # # # Let's ignore this block of code.
     # company1 = ListCharField(
@@ -139,24 +154,32 @@ class Group(BaseGroup):
     # def set_payoff_2(self): # if put those things in different functions, it won't work. In most cases, we just define one function under this class
 
         # # #  the winner and payoffs
+        # # # april 2018 adding abstain, what if there is a draw.
         votes = [p.vote for p in players]
         k_vote = votes.count("K")
         j_vote = votes.count("J")
+        a_vote = votes.count("Abstain")
         if k_vote > j_vote:
             self.winner = "K"
             for p in players:
                 p.payoff = self.quality_K + 100 - 5 * abs(10 - p.id_position)
-        else:
+        else: # in these case, if there is draw , j is the winner
             self.winner = "J"
             for p in players:
                 p.payoff = self.quality_J + 100 - 5 * abs(6 - p.id_position)
         self.k_inelection = round(k_vote/len(players)*100, 2) # show percentage
         self.j_inelection = round(j_vote/len(players)*100, 2)
+        self.a_inelection = round(a_vote/len(players)*100, 2)
 
         # # # the poll part
-        company1 = random.sample(range(1, len(players)+1), 2)
-        company2 = random.sample(range(1, len(players)+1), 2)
-        Allcompany = company1 + company2
+        poll_num = 4 # each company select poll_num of participants
+        companyA = random.sample(range(1, len(players)+1), poll_num)
+        companyB = random.sample(range(1, len(players)+1), poll_num)
+        companyC = random.sample(range(1, len(players)+1), poll_num)
+        companyD = random.sample(range(1, len(players)+1), poll_num)
+        companyE = random.sample(range(1, len(players)+1), poll_num)
+
+        Allcompany = companyA + companyB + companyC + companyD + companyE
         
         self.Allcompany = ",".join(str(e) for e in Allcompany) # actually not needed, to print it out
         
@@ -178,33 +201,53 @@ class Group(BaseGroup):
                 index_player_i = [j for j, x in enumerate(Allcompany) if x == i]
                 printout = ""
                 for index in index_player_i:
-                    if index in range(0,2):
-                        printout = printout + " 1"
-                    elif index in range(2,4):
-                        printout = printout + " 2"
+                    if index in range(0,poll_num):
+                        printout = printout + " A"
+                    elif index in range(poll_num,2*poll_num):
+                        printout = printout + " B"
+                    elif index in range(2*poll_num,3*poll_num):
+                        printout = printout + " C"
+                    elif index in range(3*poll_num,4*poll_num):
+                        printout = printout + " D"
+                    elif index in range(4*poll_num,5*poll_num):
+                        printout = printout + " E"
                     self.get_player_by_id(i).company_each_player = printout
             else:
                 self.get_player_by_id(i).company_each_player = "None"
 
 
         # # #  fraction of supporting K in each company poll
-        k_company1 = 0
-        k_company2 = 0
-        for i in company1:
+        k_companyA = 0
+        k_companyB = 0
+        k_companyC = 0
+        k_companyD = 0
+        k_companyE = 0
+        for i in companyA:
             if self.get_player_by_id(i).poll == "K":
-                k_company1 += 1
-            else:
-                pass
+                k_companyA += 1
+        for i in companyB:
+            if self.get_player_by_id(i).poll == "K":
+                k_companyB += 1
+        for i in companyA:
+            if self.get_player_by_id(i).poll == "K":
+                k_companyC += 1
+        for i in companyB:
+            if self.get_player_by_id(i).poll == "K":
+                k_companyD += 1
+        for i in companyA:
+            if self.get_player_by_id(i).poll == "K":
+                k_companyE += 1
 
-        for i in company2:
-            if self.get_player_by_id(i).poll == "K":
-                k_company2 += 1
-            else:
-                pass
-        self.company1_k_inpolls = round(k_company1/2*100, 2) # each company sample 2
-        self.company1_j_inpolls = 100-self.company1_k_inpolls
-        self.company2_k_inpolls = round(k_company2/2 *100, 2)# need more tests on the numbers. If wrong, " Let's try another way, it seems that this is working" part might have problem.
-        self.company2_j_inpolls = 100 - self.company2_k_inpolls
+        self.companyA_k_inpolls = round(k_companyA/poll_num*100, 2) # each company sample poll_num
+        self.companyA_j_inpolls = 100-self.companyA_k_inpolls
+        self.companyB_k_inpolls = round(k_companyB/poll_num *100, 2)# need more tests on the numbers. If wrong, " Let's try another way, it seems that this is working" part might have problem.
+        self.companyB_j_inpolls = 100 -self.companyB_k_inpolls
+        self.companyC_k_inpolls = round(k_companyC/poll_num*100, 2)
+        self.companyC_j_inpolls = 100-self.companyC_k_inpolls
+        self.companyD_k_inpolls = round(k_companyD/poll_num*100, 2)
+        self.companyD_j_inpolls = 100-self.companyD_k_inpolls
+        self.companyE_k_inpolls = round(k_companyE/poll_num*100, 2)
+        self.companyE_j_inpolls = 100-self.companyE_k_inpolls
     pass
 
 
@@ -218,7 +261,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
     vote = models.StringField(
-        choices=['J', 'K'],
+        choices=['J', 'K', 'Abstain'],
         widget=widgets.RadioSelect
     )
 
@@ -230,4 +273,7 @@ class Player(BasePlayer):
     # every player has model of company_each_player  which contains the companies he is answering to
     # # # companies is string field, the general idea would we get a list first then convert it to strings
     company_each_player = models.StringField()
+    def treatment(self):
+         return self.participant.vars['treatment']
+
     pass

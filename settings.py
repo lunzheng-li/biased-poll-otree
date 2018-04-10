@@ -123,7 +123,7 @@ SESSION_CONFIGS = [
     {
         'name': 'polls',
         'display_name': "simple poll",
-        'num_demo_participants': 3,
+        'num_demo_participants': 5,
         'app_sequence': ['polls'],
     },
 ]

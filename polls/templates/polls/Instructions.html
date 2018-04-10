@@ -19,9 +19,11 @@ img {
         <p>
             The study will consist of a series of separate decision-making periods. For each period, the sequence of action is illustrated below.
         </p>
-
+        {% if player.treatment == 0 %}
+        <img src="{% static "instruction_graph/control_group.png" %}" alt="control sequence" style="width:70%;">
+        {% else %}
         <img src="{% static "instruction_graph/treatment_group.png" %}" alt="treatment sequence" style="width:70%;">
-
+        {% endif %}
         <p>
             In each period, you will have the opportunity to vote in an election.
             One candidate is of PARTY K and the other one is of PARTY J.
@@ -75,6 +77,7 @@ img {
             For instance, if you have position 3, and candidate J takes position 10, then your ‘ideological payoffs’ from J’s victory are:
             <center>100-5*|3-10|=65</center>
         </p>
+
         <img src="{% static "instruction_graph/id_position.png" %}" alt="id_position graph" style="width:50%" >
 
         <h4 class="panel-sub-heading">
@@ -91,8 +94,9 @@ img {
         </h4>
 
         <p>
-            After polls have taken place, the findings of the two companies will be revealed.
-            All participants will observe the fraction of votes that each of the two candidates received in the polls of these two companies.
+            After polls have taken place, the findings of the{% if player.treatment == 0 %} five {% else %} two {% endif %} companies will be revealed.
+            All participants will observe the fraction of votes that each of the two candidates received in the polls of
+            these {% if player.treatment == 0 %} five {% else %} two {% endif %} companies.
         </p>
 
         <h4 class="panel-sub-heading">

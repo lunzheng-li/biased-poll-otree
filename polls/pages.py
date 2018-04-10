@@ -7,6 +7,9 @@ class Introduction(Page):
     # how to only display this page only in round one, the only way I can think of is to make to apps
     def is_displayed(self):
         return self.player.round_number == 1
+    # def vars_for_template(self):
+    #     return ({'treatment': self.player.participant.vars['treatment']}) # it seems this does not work, and it seems that it give everyone the same 'treatment'
+
 class Ideology(Page):
     form_model = 'player'
     pass
@@ -45,11 +48,13 @@ class PollWaitpage(WaitPage):
 class PollResult(Page):
     def is_displayed(self):
         return self.player.participant.vars['treatment'] == 0
+        # return self.player.treatment == 0
     pass
 
 class PollResult_treatment(Page):
     def is_displayed(self):
         return self.player.participant.vars['treatment'] == 1
+        # return self.player.treatment == 1
     pass
 
 class Vote(Page):
