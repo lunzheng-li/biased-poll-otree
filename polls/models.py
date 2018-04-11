@@ -64,12 +64,14 @@ further steps:
 class Constants(BaseConstants):
     name_in_url = 'polls'
     players_per_group = None
-    num_rounds = 2
+    num_rounds = 4
 
     # # # # There are always 2 poll companies. It seems that we should define this in Group. But I think it will work here.
    # Companies = ['A', 'B', 'C', 'D', 'E']
-
+    practice_rounds = 2
+    real_rounds = num_rounds - practice_rounds
     instructions_template = 'polls/Instructions.html' # everytime when adding a var in model.py, reset the database.
+
     pass
 
 
@@ -98,6 +100,7 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
+    practice_round_number = models.IntegerField() # round numbers after adding round numbers.
     quality_J = models.IntegerField() # every var need to displayed need a model field
     quality_K = models.IntegerField()
 
@@ -123,6 +126,12 @@ class Group(BaseGroup):
     companyE_j_inpolls = models.FloatField()
 
     Allcompany = models.StringField()# it's actually not needed, I just want to print it out to check
+
+    # # # treatment group, select two baised poll, in this case, let's find the poll favours K.
+    biased1_k_inpolls = models.FloatField()
+    biased1_j_inpolls = models.FloatField()
+    biased2_k_inpolls = models.FloatField()
+    biased2_j_inpolls = models.FloatField()
 
     # # # Let's ignore this block of code.
     # company1 = ListCharField(
@@ -162,11 +171,11 @@ class Group(BaseGroup):
         if k_vote > j_vote:
             self.winner = "K"
             for p in players:
-                p.payoff = self.quality_K + 100 - 5 * abs(10 - p.id_position)
+                p.payoff = c(self.quality_K + 100 - 5 * abs(10 - p.id_position))
         else: # in these case, if there is draw , j is the winner
             self.winner = "J"
             for p in players:
-                p.payoff = self.quality_J + 100 - 5 * abs(6 - p.id_position)
+                p.payoff = c(self.quality_J + 100 - 5 * abs(6 - p.id_position))
         self.k_inelection = round(k_vote/len(players)*100, 2) # show percentage
         self.j_inelection = round(j_vote/len(players)*100, 2)
         self.a_inelection = round(a_vote/len(players)*100, 2)
@@ -248,6 +257,19 @@ class Group(BaseGroup):
         self.companyD_j_inpolls = 100-self.companyD_k_inpolls
         self.companyE_k_inpolls = round(k_companyE/poll_num*100, 2)
         self.companyE_j_inpolls = 100-self.companyE_k_inpolls
+
+        list_K = sorted([self.companyA_k_inpolls, self.companyA_k_inpolls, self.companyA_k_inpolls, self.companyA_k_inpolls, self.companyA_k_inpolls,])
+        self.biased1_k_inpolls = list_K[-1]
+        self.biased1_j_inpolls = 100 - self.biased1_k_inpolls
+        self.biased2_k_inpolls = list_K[-2]
+        self.biased2_j_inpolls = 100 - self.biased2_k_inpolls
+
+    def set_practice_round_numbers(self):
+        if self.round_number < Constants.practice_rounds + 1:
+            self.practice_round_number = self.round_number
+        else:
+            self.practice_round_number = self.round_number - Constants.practice_rounds
+        return self.practice_round_number
     pass
 
 

@@ -6,7 +6,12 @@ Polls
 {% endblock %}
 
 {% block content %}
-   <p><ins>Round {{ group.round_number }} of {{ Constants.num_rounds }}</ins></p>
+       {% if group.round_number <= Constants.practice_rounds  %}
+    <p>This is a practice round, and it will not count for your final payoffs</p>
+    <p><ins>Practice round {{ group.round_number}} of {{ Constants.practice_rounds }}</ins></p>
+    {% else %}
+    <p><ins>Round {{ group.set_practice_round_numbers}} of {{ Constants.real_rounds}}</ins></p>
+    {% endif %}
     <p>You were randomly selected to participate in the polls of <strong>Company {{ player.company_each_player }}</strong>.  </p>
      <!--<p>Companies select the following player:{{ group.Allcompany }}. For instance, [3,2,2,1] means company 1 select player 3 and player 2, and company 2 select player 2 and player 1.
         (This line will be deleted later, I print it out to check if the codes work.)</p>-->

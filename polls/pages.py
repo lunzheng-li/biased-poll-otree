@@ -9,7 +9,10 @@ class Introduction(Page):
         return self.player.round_number == 1
     # def vars_for_template(self):
     #     return ({'treatment': self.player.participant.vars['treatment']}) # it seems this does not work, and it seems that it give everyone the same 'treatment'
-
+class PostPracticeWaitpage(WaitPage):
+    body_text = "We are now ready to start the first real round."
+    def is_displayed(self):
+        return self.round_number == Constants.practice_rounds + 1
 class Ideology(Page):
     form_model = 'player'
     pass
@@ -70,9 +73,20 @@ class VoteWaitpage(WaitPage):
 class FinalResult(Page):
     pass
 
+class TotalPayoff(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
+
+    def vars_for_template(self):
+
+        return {
+            'total_points': sum([p.payoff for p in self.player.in_rounds(Constants.practice_rounds +1, Constants.num_rounds )]),
+            'total_payoff': sum([p.payoff for p in self.player.in_rounds(Constants.practice_rounds +1, Constants.num_rounds )]).to_real_world_currency(self.session) + 5,
+        }
 
 page_sequence = [
     Introduction, # remember to add the page in the page sequence.
+    PostPracticeWaitpage,
     Ideology,
     Informed,
     Uninformed,
@@ -84,5 +98,6 @@ page_sequence = [
     PollResult_treatment,
     Vote,
     PollWaitpage,
-    FinalResult
+    FinalResult,
+    TotalPayoff,
 ]

@@ -6,7 +6,12 @@
 {% endblock %}
 
 {% block content %}
-  <p><ins>Round {{ group.round_number }} of {{ Constants.num_rounds }}</ins></p>
+      {% if group.round_number <= Constants.practice_rounds  %}
+    <p>This is a practice round, and it will not count for your final payoffs</p>
+    <p><ins>Practice round {{ group.round_number}} of {{ Constants.practice_rounds }}</ins></p>
+    {% else %}
+    <p><ins>Round {{ group.set_practice_round_numbers}} of {{ Constants.real_rounds}}</ins></p>
+    {% endif %}
     <p>Now elections will take place.</p>
     <p>The candidate that receives the majority of votes will be elected.</p>
     {% formfield player.vote label="Please state your choice:" %}

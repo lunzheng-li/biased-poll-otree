@@ -55,7 +55,7 @@ AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
-REAL_WORLD_CURRENCY_CODE = 'USD'
+REAL_WORLD_CURRENCY_CODE = 'GBP'
 USE_POINTS = True
 
 
@@ -125,6 +125,7 @@ SESSION_CONFIGS = [
         'display_name': "simple poll",
         'num_demo_participants': 5,
         'app_sequence': ['polls'],
+        'real_world_currency_per_point': 0.01
     },
 ]
 
