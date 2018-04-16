@@ -100,31 +100,45 @@ SESSION_CONFIG_DEFAULTS = {
 
 
 SESSION_CONFIGS = [
-    {
-        'name': 'Li_survey',
-        'display_name': 'A simple survey',
-        'num_demo_participants': 3,
-        'app_sequence': ['Li_survey'],
-
-    },
-    {
-        'name': 'my_public_goods',
-        'display_name': 'A simple public goods game',
-        'num_demo_participants': 3,
-        'app_sequence': ['my_public_goods'],
-
-    },
-    {
-        'name': 'my_trust',
-        'display_name': "simple trust Game",
-        'num_demo_participants': 2,
-        'app_sequence': ['my_trust'],
-    },
+    # {
+    #     'name': 'Li_survey',
+    #     'display_name': 'A simple survey',
+    #     'num_demo_participants': 3,
+    #     'app_sequence': ['Li_survey'],
+    #
+    # },
+    # {
+    #     'name': 'my_public_goods',
+    #     'display_name': 'A simple public goods game',
+    #     'num_demo_participants': 3,
+    #     'app_sequence': ['my_public_goods'],
+    #
+    # },
+    # {
+    #     'name': 'my_trust',
+    #     'display_name': "simple trust Game",
+    #     'num_demo_participants': 2,
+    #     'app_sequence': ['my_trust'],
+    # },
     {
         'name': 'polls',
         'display_name': "simple poll",
         'num_demo_participants': 5,
         'app_sequence': ['polls'],
+        'real_world_currency_per_point': 0.01
+    },
+    {
+        'name': 'polls_treatment',
+        'display_name': "Treatment",
+        'num_demo_participants': 5,
+        'app_sequence': ['polls_treatment'],
+        'real_world_currency_per_point': 0.01
+    },
+        {
+        'name': 'polls_control',
+        'display_name': "Control",
+        'num_demo_participants': 5,
+        'app_sequence': ['polls_control'],
         'real_world_currency_per_point': 0.01
     },
 ]

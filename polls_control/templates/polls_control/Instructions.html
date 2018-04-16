@@ -1,0 +1,124 @@
+
+{% load otree static %}
+<style>
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+
+<div class="instructions well well-lg">
+
+
+    <div class="panel-body">
+                <h2 class="panel-sub-heading" align="center">
+            <em>Instructions</em>
+        </h2>
+
+        <p>
+            The study will consist of a series of separate decision-making periods. For each period, the sequence of action is illustrated below.
+        </p>
+
+        <img src="{% static "instruction_graph/control_group.png" %}" alt="treatment sequence" style="width:70%;">
+
+        <p>
+            In each period, you will have the opportunity to vote in an election.
+            One candidate is of PARTY K and the other one is of PARTY J.
+            Your payoff in each period will depend on the quality of the election winner and on your ideological position.
+
+        </p>
+
+        <h4 class="panel-sub-heading">
+            <em>Candidate Quality</em>
+        </h4>
+
+        <p>
+            For each candidate a random number is drawn from an urn.
+            The numbers in the urn are between 1 and 30 and each is equally likely to be selected.
+            This ‘quality number’ reflects the competency of the candidate in handling policy matters.
+            The higher is the number the better is the quality of the candidate.
+        </p>
+        <p>
+            This number is redrawn every period for each candidate.
+        </p>
+
+        <h4 class="panel-sub-heading">
+            <em>Informed and Uninformed Participants</em>
+        </h4>
+
+        <p>
+            Every period some participants are told the quality numbers for two candidates, e.g. “Candidate J’s quality is 10 and candidate K’s quality is 24.”
+            These are the informed participants. The rest of the participants receive no additional information.
+            Who receives this information is determined by the ideological positions.
+        </p>
+        <p>
+            Participants with positions {1,2,3,5,7,9,11} are informed.
+            Participants with positions {4,6,8,10,12,13,14,15} are uninformed.
+            This fact does not change across rounds.
+        </p>
+
+        <h4 class="panel-sub-heading">
+            <em>Ideological Positions</em>
+        </h4>
+
+        <p>
+            At the start of each period you will be given a ‘position number’ between 1 and 15.
+            This number affects how you value the positions of the two candidates.
+            Candidate of Party J is in position 6 and candidate of Party K is in position 10.
+            These positions remain fixed for both candidates for the entirety of the study, but your position may change every period.
+        </p>
+        <p>
+            Your ‘ideological score’ from the victory of each candidate is equal to 100 points minus 5 times the difference between your position and the candidate’s position.
+        </p>
+        <p>
+            For example, if you are in position 3, and candidate J takes position 10, then your ‘ideological payoff’ from J’s victory is:
+            <center>100-5*|3-10|=65</center>
+        </p>
+
+        <img src="{% static "instruction_graph/id_position.png" %}" alt="id_position graph" style="width:50%" >
+
+        <h4 class="panel-sub-heading">
+           <em> Polls</em>
+        </h4>
+
+        <p>
+            After the ‘informed voters’ receive their information, five polling companies will conduct voting intention polls.
+            In each poll, four out of the fifteen participants will be randomly chosen to state their voting preferences.
+        </p>
+
+        <h4 class="panel-sub-heading">
+            <em>Information about Poll Results</em>
+        </h4>
+
+        <p>
+            After polls have taken place, the findings of the five companies will be revealed.
+            All participants will observe the fraction of votes that each of the two candidates received in the polls of
+            these five companies.
+        </p>
+
+        <h4 class="panel-sub-heading">
+            <em>Elections and Payoffs</em>
+        </h4>
+
+        <p>
+            In the end of each period, elections take place, where each participant may vote or abstain.
+            The winner of the election is determined by simple majority.
+        </p>
+        <p>
+            For example, if you are in position 3, candidate J takes position 10, and J’s quality is 20, then your ‘total payoff’ from J’s victory is:
+            <center>100-5*|3-10|+20=85</center>
+
+        </p>
+        <p>
+            The total payoff to you if a given candidate wins is the sum of his quality and your ‘ideological payoffs’ from the candidate’s victory.
+        </p>
+
+        <p>
+            Your payoffs from this study will be the sum of all payoffs that you accumulate in each period.
+            They will be paid to you in cash, at the end of the study. Each earned point will correspond to one penny. You will now participate in three practice rounds.
+            If you have any questions, please raise your hand and your question will be addressed individually.
+
+        </p>
+    </div>
+</div>
