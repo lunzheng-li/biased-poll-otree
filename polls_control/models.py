@@ -87,12 +87,18 @@ class Group(BaseGroup):
         a_vote = votes.count("Abstain")
         if k_vote > j_vote:
             self.winner = "K"
+        elif j_vote > k_vote:
+            self.winner = "J"
+        elif k_vote == j_vote:
+            self.winner = random.choice(["K","J"])
+
+        if self.winner == "K":
             for p in players:
                 p.payoff = c(self.quality_K + 100 - 5 * abs(10 - p.id_position))
-        else: # in these case, if there is draw , j is the winner
-            self.winner = "J"
+        else:
             for p in players:
                 p.payoff = c(self.quality_J + 100 - 5 * abs(6 - p.id_position))
+
         self.k_inelection = round(k_vote/len(players)*100, 2) # show percentage
         self.j_inelection = round(j_vote/len(players)*100, 2)
         self.a_inelection = round(a_vote/len(players)*100, 2)
@@ -132,36 +138,45 @@ class Group(BaseGroup):
 
 
         # # #  fraction of supporting K in each company poll
-        k_companyA = 0
-        k_companyB = 0
-        k_companyC = 0
-        k_companyD = 0
-        k_companyE = 0
+        k_companyA= k_companyB= k_companyC= k_companyD= k_companyE = 0
+        j_companyA= j_companyB= j_companyC= j_companyD= j_companyE = 0
+
         for i in companyA:
             if self.get_player_by_id(i).poll == "K":
                 k_companyA += 1
+            elif self.get_player_by_id(i).poll == "J":
+                j_companyA += 1
         for i in companyB:
             if self.get_player_by_id(i).poll == "K":
                 k_companyB += 1
-        for i in companyA:
+            elif self.get_player_by_id(i).poll == "J":
+                j_companyB += 1
+        for i in companyC:
             if self.get_player_by_id(i).poll == "K":
                 k_companyC += 1
-        for i in companyB:
+            elif self.get_player_by_id(i).poll == "J":
+                j_companyC += 1
+        for i in companyD:
             if self.get_player_by_id(i).poll == "K":
                 k_companyD += 1
-        for i in companyA:
+            elif self.get_player_by_id(i).poll == "J":
+                j_companyD += 1
+        for i in companyE:
             if self.get_player_by_id(i).poll == "K":
                 k_companyE += 1
+            elif self.get_player_by_id(i).poll == "J":
+                j_companyE += 1
 
         self.companyA_k_inpolls = round(k_companyA/poll_num*100, 2)
-        self.companyA_j_inpolls = 100-self.companyA_k_inpolls
-        self.companyB_k_inpolls = round(k_companyB/poll_num *100, 2)
+        self.companyA_j_inpolls = round(j_companyA/poll_num*100, 2)
+        self.companyB_k_inpolls = round(k_companyB/poll_num*100, 2)
+        self.companyB_k_inpolls = round(j_companyB/poll_num*100, 2)
         self.companyC_k_inpolls = round(k_companyC/poll_num*100, 2)
-        self.companyC_j_inpolls = 100-self.companyC_k_inpolls
+        self.companyC_j_inpolls = round(j_companyC/poll_num*100, 2)
         self.companyD_k_inpolls = round(k_companyD/poll_num*100, 2)
-        self.companyD_j_inpolls = 100-self.companyD_k_inpolls
+        self.companyD_j_inpolls = round(j_companyD/poll_num*100, 2)
         self.companyE_k_inpolls = round(k_companyE/poll_num*100, 2)
-        self.companyE_j_inpolls = 100-self.companyE_k_inpolls
+        self.companyE_j_inpolls = round(j_companyE/poll_num*100, 2)
         
         # # # # sort the fraction of support in polls, and pick the baised ones
         # list_K = sorted([self.companyA_k_inpolls, self.companyA_k_inpolls, self.companyA_k_inpolls, self.companyA_k_inpolls, self.companyA_k_inpolls,])
@@ -184,7 +199,7 @@ class Player(BasePlayer):
 
     id_position = models.IntegerField()
     poll = models.StringField(
-        choices=['J', 'K'],
+        choices=['J', 'K','Prefer not to answer'],
         widget=widgets.RadioSelect
     )
     vote = models.StringField(
