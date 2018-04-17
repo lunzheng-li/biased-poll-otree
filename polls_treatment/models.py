@@ -178,8 +178,8 @@ class Group(BaseGroup):
         # # # sort the fraction of support in polls, and pick the baised ones
         # since now we have abstain, we have to redefine which is the most baised one
         list_K = sorted(
-            [self.companyA_k_inpolls, self.companyA_k_inpolls, self.companyA_k_inpolls, self.companyA_k_inpolls,
-             self.companyA_k_inpolls, ])
+            [self.companyA_k_inpolls, self.companyB_k_inpolls, self.companyC_k_inpolls, self.companyD_k_inpolls,
+             self.companyE_k_inpolls, ]) # OR MAKE IT DIFFERENCE BETWEEN K AND J
         self.biased1_k_inpolls = list_K[-1]
         self.biased1_j_inpolls = 100 - self.biased1_k_inpolls
         self.biased2_k_inpolls = list_K[-2]

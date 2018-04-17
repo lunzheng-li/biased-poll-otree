@@ -105,13 +105,43 @@ class Group(BaseGroup):
 
         # # # the poll part
         poll_num = 4 # each company select poll_num of participants
-        companyA = random.sample(range(1, len(players)+1), poll_num)
-        companyB = random.sample(range(1, len(players)+1), poll_num)
-        companyC = random.sample(range(1, len(players)+1), poll_num)
-        companyD = random.sample(range(1, len(players)+1), poll_num)
-        companyE = random.sample(range(1, len(players)+1), poll_num)
+        companyA_ID = random.sample(range(1, len(players)+1), poll_num)
+        companyB_ID = random.sample(range(1, len(players)+1), poll_num)
+        companyC_ID = random.sample(range(1, len(players)+1), poll_num)
+        companyD_ID = random.sample(range(1, len(players)+1), poll_num)
+        companyE_ID = random.sample(range(1, len(players)+1), poll_num)
 
-        Allcompany = companyA + companyB + companyC + companyD + companyE
+        companyA = [self.get_player_by_id(i).poll for i in companyA_ID]
+        companyB = [self.get_player_by_id(i).poll for i in companyB_ID]
+        companyC = [self.get_player_by_id(i).poll for i in companyC_ID]
+        companyD = [self.get_player_by_id(i).poll for i in companyD_ID]
+        companyE = [self.get_player_by_id(i).poll for i in companyE_ID]
+
+        k_companyA = companyA.count("K")
+        k_companyB = companyB.count("K")
+        k_companyC = companyC.count("K")
+        k_companyD = companyD.count("K")
+        k_companyE = companyE.count("K")
+        j_companyA = companyA.count("J")
+        j_companyB = companyB.count("J")
+        j_companyC = companyC.count("J")
+        j_companyD = companyD.count("J")
+        j_companyE = companyE.count("J")
+
+        self.companyA_k_inpolls = round(k_companyA/poll_num*100, 2)
+        self.companyA_j_inpolls = round(j_companyA/poll_num*100, 2)
+        self.companyB_k_inpolls = round(k_companyB/poll_num*100, 2)
+        self.companyB_j_inpolls = round(j_companyB/poll_num*100, 2)
+        self.companyC_k_inpolls = round(k_companyC/poll_num*100, 2)
+        self.companyC_j_inpolls = round(j_companyC/poll_num*100, 2)
+        self.companyD_k_inpolls = round(k_companyD/poll_num*100, 2)
+        self.companyD_j_inpolls = round(j_companyD/poll_num*100, 2)
+        self.companyE_k_inpolls = round(k_companyE/poll_num*100, 2)
+        self.companyE_j_inpolls = round(j_companyE/poll_num*100, 2)
+        # see above, I can basicly get the percentage before find out the printout, it must be something wrong with
+        # find out the printout
+
+        Allcompany = companyA_ID + companyB_ID + companyC_ID + companyD_ID + companyE_ID
         
         self.Allcompany = ",".join(str(e) for e in Allcompany) # actually not needed, to print it out
         
@@ -138,52 +168,37 @@ class Group(BaseGroup):
 
 
         # # #  fraction of supporting K in each company poll
-        k_companyA= k_companyB= k_companyC= k_companyD= k_companyE = 0
-        j_companyA= j_companyB= j_companyC= j_companyD= j_companyE = 0
 
-        for i in companyA:
-            if self.get_player_by_id(i).poll == "K":
-                k_companyA += 1
-            elif self.get_player_by_id(i).poll == "J":
-                j_companyA += 1
-        for i in companyB:
-            if self.get_player_by_id(i).poll == "K":
-                k_companyB += 1
-            elif self.get_player_by_id(i).poll == "J":
-                j_companyB += 1
-        for i in companyC:
-            if self.get_player_by_id(i).poll == "K":
-                k_companyC += 1
-            elif self.get_player_by_id(i).poll == "J":
-                j_companyC += 1
-        for i in companyD:
-            if self.get_player_by_id(i).poll == "K":
-                k_companyD += 1
-            elif self.get_player_by_id(i).poll == "J":
-                j_companyD += 1
-        for i in companyE:
-            if self.get_player_by_id(i).poll == "K":
-                k_companyE += 1
-            elif self.get_player_by_id(i).poll == "J":
-                j_companyE += 1
+        # k_companyA= k_companyB= k_companyC= k_companyD= k_companyE = 0
+        # j_companyA= j_companyB= j_companyC= j_companyD= j_companyE = 0
 
-        self.companyA_k_inpolls = round(k_companyA/poll_num*100, 2)
-        self.companyA_j_inpolls = round(j_companyA/poll_num*100, 2)
-        self.companyB_k_inpolls = round(k_companyB/poll_num*100, 2)
-        self.companyB_k_inpolls = round(j_companyB/poll_num*100, 2)
-        self.companyC_k_inpolls = round(k_companyC/poll_num*100, 2)
-        self.companyC_j_inpolls = round(j_companyC/poll_num*100, 2)
-        self.companyD_k_inpolls = round(k_companyD/poll_num*100, 2)
-        self.companyD_j_inpolls = round(j_companyD/poll_num*100, 2)
-        self.companyE_k_inpolls = round(k_companyE/poll_num*100, 2)
-        self.companyE_j_inpolls = round(j_companyE/poll_num*100, 2)
-        
-        # # # # sort the fraction of support in polls, and pick the baised ones
-        # list_K = sorted([self.companyA_k_inpolls, self.companyA_k_inpolls, self.companyA_k_inpolls, self.companyA_k_inpolls, self.companyA_k_inpolls,])
-        # self.biased1_k_inpolls = list_K[-1]
-        # self.biased1_j_inpolls = 100 - self.biased1_k_inpolls
-        # self.biased2_k_inpolls = list_K[-2]
-        # self.biased2_j_inpolls = 100 - self.biased2_k_inpolls
+        # for i in companyA:
+        #     if self.get_player_by_id(i).poll == "K":
+        #         k_companyA += 1
+        #     elif self.get_player_by_id(i).poll == "J":
+        #         j_companyA += 1
+        # for i in companyB:
+        #     if self.get_player_by_id(i).poll == "K":
+        #         k_companyB += 1
+        #     elif self.get_player_by_id(i).poll == "J":
+        #         j_companyB += 1
+        # for i in companyC:
+        #     if self.get_player_by_id(i).poll == "K":
+        #         k_companyC += 1
+        #     elif self.get_player_by_id(i).poll == "J":
+        #         j_companyC += 1
+        # for i in companyD:
+        #     if self.get_player_by_id(i).poll == "K":
+        #         k_companyD += 1
+        #     elif self.get_player_by_id(i).poll == "J":
+        #         j_companyD += 1
+        # for i in companyE:
+        #     if self.get_player_by_id(i).poll == "K":
+        #         k_companyE += 1
+        #     elif self.get_player_by_id(i).poll == "J":
+        #         j_companyE += 1
+
+
 
     # # # define the display of round numbers
     def set_practice_round_numbers(self):
