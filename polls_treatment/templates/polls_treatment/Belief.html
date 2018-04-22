@@ -1,6 +1,7 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree %}
 
+
 {% block title %}
 
 {% endblock %}
@@ -12,9 +13,8 @@
     <p><ins>Round {{ group.set_practice_round_numbers}} of {{ Constants.real_rounds}}</ins></p>
     {% endif %}
     <br>
-
-    <h3>Ideological Positions</h3>
-    <p>Your position for this round is <strong>position {{ player.id_position }}</strong>. </p>
+    <h3>Your Belief</h3>
+    <p>{% formfield player.belief label="Please state you expected vote share for candidate K in the forthcoming elections (from 0 to 100 percent):" %} &#37 </p>
     {% next_button %}
  {% include Constants.instructions_template %}
 {% endblock %}

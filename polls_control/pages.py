@@ -2,6 +2,19 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
+class survey(Page):
+    form_model = 'player'
+    form_fields = ['gender','nationality', 'major','income']
+    def is_displayed(self):
+        return self.player.round_number == 1
+    pass
+
+
+class WelcomePage(Page):
+    def is_displayed(self):
+        return self.player.round_number == 1
+
+
 class Introduction(Page):
     timeout_seconds = 1200
     def is_displayed(self):
@@ -52,6 +65,11 @@ class PollWaitpage(WaitPage):
 class PollResult(Page):
     pass
 
+class Belief(Page):
+    form_model = 'player'
+    form_fields = ['belief']
+    pass
+
 class Vote(Page):
     form_model = 'player'
     form_fields = ['vote']
@@ -77,6 +95,8 @@ class TotalPayoff(Page):
         }
 
 page_sequence = [
+    survey,
+    WelcomePage,
     Introduction, # remember to add the page in the page sequence.
     PostPracticeWaitpage,
     Ideology,
@@ -87,6 +107,7 @@ page_sequence = [
     PollNone,
     PollWaitpage,
     PollResult,
+    Belief,
     Vote,
     PollWaitpage,
     FinalResult,

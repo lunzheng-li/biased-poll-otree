@@ -4,6 +4,7 @@ from otree.api import (
 )
 
 import random
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 author = 'Lunzheng Li'
 
@@ -28,8 +29,16 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def creating_session(self):
         # # # since this application is only for the treatment group, we don't need to creat the boolean treatment var here
+
+        # voters can not have same id position, I firstly create a list with random order, then assign it one by one start from index 0
+        id_list = list(range(1,16))
+        random.shuffle(id_list)
         for player in self.get_players():
-            player.id_position = random.randint(1, 15)
+            player.id_position = id_list[0]
+            del id_list[0] # what's cool is that the old index 1 become 0 now.
+
+        # for player in self.get_players():
+        #     player.id_position = random.randint(1, 15)
 
         for group in self.get_groups():
             group.quality_J = random.randint(1, 40)
@@ -224,5 +233,20 @@ class Player(BasePlayer):
 
     company_each_player = models.StringField()
 
+    belief = models.IntegerField(
+        validators=[MaxValueValidator(100), MinValueValidator(0)]
+     )
+
+    # Survey
+    gender = models.StringField(blank=True,
+        choices=['M', 'F','Other','Prefer not to answer'],
+        widget=widgets.RadioSelect
+    )
+    nationality = models.StringField(blank=True)
+    major = models.StringField(blank=True)
+    income = models.StringField(blank=True,
+        choices=['Less than £40,000', '£40,000-70,000','£70,000 -£100,000','more than £100,000'],
+        widget=widgets.RadioSelect
+    )
 
     pass

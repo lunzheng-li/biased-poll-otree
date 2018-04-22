@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Please state your answers to the following questions or leave blank:
+{% endblock %}
+
+{% block content %}
+    <ol>
+    <li>{% formfield player.gender label="Please state your gender:" %}</li>
+    <li>{% formfield player.nationality label="What is you nationality?" %}</li>
+    <li>{% formfield player.major label="Your major of study:" %}</li>
+    <li>{% formfield player.income label="Please state your family’s income bracket:" %}</li>
+    </ol>
+
+    {% next_button %}
+{% endblock %}
