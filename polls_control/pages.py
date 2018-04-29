@@ -26,7 +26,6 @@ class PostPracticeWaitpage(WaitPage):
         return self.round_number == Constants.practice_rounds + 1
         
 class Ideology(Page):
-    form_model = 'player'
     pass
     
 # Participants with ideological positions {1,2,3,5,7,9, 11,13} are informed.
@@ -43,7 +42,7 @@ class Uninformed(Page):
 
 class SelectWaitpage(WaitPage): # We need this waiting pages, so companies can randomly select subjects. but can we get get rid of this waiting page?
     def after_all_players_arrive(self):
-        self.group.set_payoff()
+        self.group.set_pollwaitpage()
 
 class Poll(Page):
     form_model = 'player'
@@ -59,7 +58,7 @@ class PollNone(Page):
     
 class PollWaitpage(WaitPage):
     def after_all_players_arrive(self):
-        self.group.set_payoff()
+        self.group.set_pollresultwaitpage()
     pass
 
 class PollResult(Page):
@@ -67,7 +66,7 @@ class PollResult(Page):
 
 class Belief(Page):
     form_model = 'player'
-    form_fields = ['belief']
+    form_fields = ['belief_j', 'belief_k']
     pass
 
 class Vote(Page):
@@ -77,7 +76,7 @@ class Vote(Page):
 
 class VoteWaitpage(WaitPage):
     def after_all_players_arrive(self):
-        self.group.set_payoff()
+        self.group.set_voteresultwaitpage()
     pass
 
 class FinalResult(Page):
@@ -109,7 +108,7 @@ page_sequence = [
     PollResult,
     Belief,
     Vote,
-    PollWaitpage,
+    VoteWaitpage,
     FinalResult,
     TotalPayoff,
 ]

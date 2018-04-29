@@ -1,5 +1,6 @@
-{% extends "global/Page.html" %}
+{% extends "polls_control/Page.html" %}
 {% load staticfiles otree %}
+
 
 {% block title %}
 
@@ -13,8 +14,9 @@
     <p><ins>Round {{ group.set_practice_round_numbers}} of {{ Constants.real_rounds}}</ins></p>
     {% endif %}
     <br>
-    <h3>Ideological Positions</h3>
-    <p>Your position for this round is <strong>position {{ player.id_position }}</strong>. </p>
-    {% next_button %}
- {% include Constants.instructions_template %}
+    <h3 class="center">Ideological Positions</h3>
+    <p class="center">Your position for this round is <strong>position {{ player.id_position }}</strong>. </p>
+    <button class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
+    <br><br>
+    {% include Constants.instructions_template %}
 {% endblock %}

@@ -1,5 +1,6 @@
-{% extends "global/Page.html" %}
+{% extends "polls_control/Page.html" %}
 {% load staticfiles otree %}
+
 
 {% block title %}
 
@@ -14,12 +15,12 @@
     {% endif %}
     <br>
     <h3>Polls</h3>
-    <p>In this period you were <strong>not</strong> randomly selected to participate in a poll. </p>
-    <p>Please wait while others participate in the polls.</p>
-    <p>Companies select the following player:{{ group.Allcompany }}. </p>
-    <p>hjoghiohio{{group.companyA}}</p>
-    {% next_button %}
-     {% include Constants.instructions_template %}
+    <p class="center">In this period you were <strong>not</strong> randomly selected to participate in a poll. <br>
+    Please wait while others participate in the polls.</p>
+
+    <button class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
+    <br><br>
+    {% include Constants.instructions_template %}
 {% endblock %}
 
 

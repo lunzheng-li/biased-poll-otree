@@ -1,5 +1,6 @@
-{% extends "global/Page.html" %}
+{% extends "polls_control/Page.html" %}
 {% load staticfiles otree %}
+
 
 {% block title %}
 
@@ -13,12 +14,13 @@
     <p><ins>Round {{ group.set_practice_round_numbers}} of {{ Constants.real_rounds}}</ins></p>
     {% endif %}
     <br>
-    <h3>  Elections</h3>
-    <p>Now elections will take place.</p>
-    <p>The candidate that receives the majority of votes will be elected.</p>
-    {% formfield player.vote label="Please state your choice:" %}
-    {% next_button %}
-     {% include Constants.instructions_template %}
+    <h3 class="center">  Elections</h3>
+    <p class="center">Now elections will take place.<br>
+    The candidate that receives the majority of votes will be elected.</p>
+    <center>{% formfield player.vote label="Please state your choice:" %}</center>
+    <button class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
+    <br><br>
+    {% include Constants.instructions_template %}
 {% endblock %}
 
 
