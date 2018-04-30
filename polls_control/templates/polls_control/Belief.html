@@ -15,11 +15,12 @@
     {% endif %}
     <br>
     <h3 class = "center">Your Belief</h3>
+
+        <center>{% formfield player.belief_k label="Please state your expected vote share for candidate K in the forthcoming elections (from 0 to 100):" %}</center>
+    <br>
+    <center>{% formfield player.belief_j label="Please state your expected vote share for candidate J in the forthcoming elections (from 0 to 100):" %}</center>
+    <br>
     <p class = 'center'>
-        {% formfield player.belief_k label="Please state your expected vote share for candidate K in the forthcoming elections (from 0 to 100):" %}
-    <br>
-    {% formfield player.belief_j label="Please state your expected vote share for candidate J in the forthcoming elections (from 0 to 100):" %}
-    <br>
     <strong>Please make sure that the numbers you entered add up to 100.</strong>
     </p>
     <button class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
