@@ -77,6 +77,13 @@ class VoteWaitpage(WaitPage):
 class FinalResult(Page):
     pass
 
+class survey(Page):
+    form_model = 'player'
+    form_fields = ['gender','nationality', 'major','income']
+    def is_displayed(self):
+        return self.player.round_number == Constants.num_rounds
+    pass
+
 class TotalPayoff(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
@@ -87,12 +94,6 @@ class TotalPayoff(Page):
             'total_payoff': sum([p.payoff for p in self.player.in_rounds(Constants.practice_rounds +1, Constants.num_rounds )]).to_real_world_currency(self.session) + 5,
         }
 
-class survey(Page):
-    form_model = 'player'
-    form_fields = ['gender','nationality', 'major','income']
-    def is_displayed(self):
-        return self.player.round_number == Constants.num_rounds
-    pass
 
 page_sequence = [
     WelcomePage,
@@ -110,6 +111,6 @@ page_sequence = [
     Vote,
     VoteWaitpage,
     FinalResult,
-    TotalPayoff,
     survey,
+    TotalPayoff,
 ]

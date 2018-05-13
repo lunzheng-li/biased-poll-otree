@@ -93,7 +93,7 @@ mturk_hit_settings = {
 
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.000,
-    'participation_fee': 0.00,
+    'participation_fee': 5.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
 }
@@ -132,14 +132,14 @@ SESSION_CONFIGS = [
         'display_name': "Treatment",
         'num_demo_participants': 5,
         'app_sequence': ['polls_treatment'],
-        'real_world_currency_per_point': 0.01
+        'real_world_currency_per_point': 0.005
     },
         {
         'name': 'polls_control',
         'display_name': "Control",
         'num_demo_participants': 5,
         'app_sequence': ['polls_control'],
-        'real_world_currency_per_point': 0.01
+        'real_world_currency_per_point': 0.005
     },
 ]
 

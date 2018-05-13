@@ -48,8 +48,8 @@ class Subsession(BaseSubsession):
             del id_list[0] # what's cool is that the old index 1 become 0 now.
 
         for group in self.get_groups(): # it works if we have multiple groups.
-            group.quality_J = random.randint(1, 30)
-            group.quality_K = random.randint(1, 30)
+            group.quality_J = random.randint(1, 120)
+            group.quality_K = random.randint(1, 120)
             group.Allcompany = ",".join(str(e) for e in Allcompany)
 
 
