@@ -1,5 +1,6 @@
-{% extends "global/Page.html" %}
+{% extends "polls_control/Page.html" %}
 {% load staticfiles otree %}
+
 
 {% block title %}
 
@@ -12,17 +13,16 @@
     <p><ins>Round {{ group.set_practice_round_numbers}} of {{ Constants.real_rounds}}</ins></p>
     {% endif %}
     <br>
-
     <h3>Election results and Payoffs</h3>
-    <p><li>{{ group.j_inelection }}&#37; &nbsp;               voted for Candidate J</li>
-    <li>{{ group.k_inelection }}&#37;  &nbsp;              voted for Candidate K</li></p>
-    <p><strong>Candidate {{ group.winner }}</strong> wins </p>
-    <p>Your points earned in this round: <strong>{{ player.payoff }}</strong></p>
+    <p class="center"><ul><li>{{ group.j_inelection }}&#37; &nbsp;               voted for Candidate J</li>
+    <li>{{ group.k_inelection }}&#37;  &nbsp;              voted for Candidate K</li></ul></p>
+    <p class="center"><strong>Candidate {{ group.winner }}</strong> wins <br>
+    Your points earned in this round: <strong>{{ player.payoff }}</strong></p>
 
-        {% if group.round_number <= Constants.practice_rounds  %}
-        <p><ins>If this were a real round, you would have earned this amount of pennies in cash.</ins></p>
+    {% if group.round_number <= Constants.practice_rounds  %}
+        <p class="center"><ins>If this were a real round, you would have earned half this amount of pennies in cash.</ins></p>
     {% else %}<p></p>
     {% endif %}
-    {% next_button %}
 
+    <button class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
 {% endblock %}

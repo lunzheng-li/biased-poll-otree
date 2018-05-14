@@ -2,17 +2,11 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
-class survey(Page):
-    form_model = 'player'
-    form_fields = ['gender','nationality', 'major','income']
-    def is_displayed(self):
-        return self.player.round_number == 1
-    pass
-
 
 class WelcomePage(Page):
     def is_displayed(self):
         return self.player.round_number == 1
+
 
 class Introduction(Page):
     timeout_seconds = 1200
@@ -29,7 +23,6 @@ class PostPracticeWaitpage(WaitPage):
 
 
 class Ideology(Page):
-    form_model = 'player'
     pass
 
 
@@ -52,7 +45,7 @@ class Uninformed(Page):
 class SelectWaitpage(
     WaitPage):  # We need this waiting pages, so companies can randomly select subjects. but can we get get rid of this waiting page?
     def after_all_players_arrive(self):
-        self.group.set_payoff()
+        self.group.set_pollwaitpage()
 
 
 class Poll(Page):
@@ -74,7 +67,7 @@ class PollNone(Page):
 
 class PollWaitpage(WaitPage):
     def after_all_players_arrive(self):
-        self.group.set_payoff()
+        self.group.set_pollresultwaitpage()
 
     pass
 
@@ -82,10 +75,18 @@ class PollWaitpage(WaitPage):
 class PollResult_treatment(Page):
     pass
 
+
 class Belief(Page):
     form_model = 'player'
-    form_fields = ['belief']
+    form_fields = ['belief_j', 'belief_k']
+
+    def error_message(self, values):
+        print('values is', values)
+        if values['belief_j'] + values['belief_k'] != 100:
+            return 'The numbers must add up to 100'
+
     pass
+
 
 class Vote(Page):
     form_model = 'player'
@@ -95,12 +96,22 @@ class Vote(Page):
 
 class VoteWaitpage(WaitPage):
     def after_all_players_arrive(self):
-        self.group.set_payoff()
+        self.group.set_voteresultwaitpage()
 
     pass
 
 
 class FinalResult(Page):
+    pass
+
+
+class survey(Page):
+    form_model = 'player'
+    form_fields = ['gender', 'nationality', 'major', 'income']
+
+    def is_displayed(self):
+        return self.player.round_number == Constants.num_rounds
+
     pass
 
 
@@ -119,7 +130,6 @@ class TotalPayoff(Page):
 
 
 page_sequence = [
-    survey,
     WelcomePage,
     Introduction,  # remember to add the page in the page sequence.
     PostPracticeWaitpage,
@@ -133,8 +143,8 @@ page_sequence = [
     PollResult_treatment,
     Belief,
     Vote,
-    PollWaitpage,
+    VoteWaitpage,
     FinalResult,
+    survey,
     TotalPayoff,
 ]
-

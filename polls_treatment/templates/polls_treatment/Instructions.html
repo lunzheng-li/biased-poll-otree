@@ -28,6 +28,25 @@ img {
             Your payoff in each period will depend on the quality of the election winner and on your ideological position.
 
         </p>
+        <h4 class="panel-sub-heading">
+            <em>Ideological Positions</em>
+        </h4>
+
+        <p>
+            At the start of each period you will be given a ‘position number’ between 1 and 15.
+            This number affects how you value the positions of the two candidates.
+            Candidate of Party J is in position 6 and candidate of Party K is in position 10.
+            These positions remain fixed for both candidates for the entirety of the study, but your position may change every period.
+        </p>
+        <p>
+            Your ‘ideological score’ from the victory of each candidate is equal to 100 points minus 5 times the difference between your position and the candidate’s position.
+        </p>
+        <p>
+            For example, if you are in position 3, and candidate J takes position 10, then your ‘ideological payoff’ from J’s victory is:
+            <center>100-5*|3-10|=65</center>
+        </p>
+
+        <img src="{% static "instruction_graph/id_position.png" %}" alt="id_position graph" style="width:50%" >
 
         <h4 class="panel-sub-heading">
             <em>Candidate Quality</em>
@@ -35,7 +54,7 @@ img {
 
         <p>
             For each candidate a random number is drawn from an urn.
-            The numbers in the urn are between 1 and 30 and each is equally likely to be selected.
+            The numbers in the urn are between 1 and 120 and each is equally likely to be selected.
             This ‘quality number’ reflects the competency of the candidate in handling policy matters.
             The higher is the number the better is the quality of the candidate.
         </p>
@@ -58,25 +77,7 @@ img {
             This fact does not change across rounds.
         </p>
 
-        <h4 class="panel-sub-heading">
-            <em>Ideological Positions</em>
-        </h4>
 
-        <p>
-            At the start of each period you will be given a ‘position number’ between 1 and 15.
-            This number affects how you value the positions of the two candidates.
-            Candidate of Party J is in position 6 and candidate of Party K is in position 10.
-            These positions remain fixed for both candidates for the entirety of the study, but your position may change every period.
-        </p>
-        <p>
-            Your ‘ideological score’ from the victory of each candidate is equal to 100 points minus 5 times the difference between your position and the candidate’s position.
-        </p>
-        <p>
-            For example, if you are in position 3, and candidate J takes position 10, then your ‘ideological payoff’ from J’s victory is:
-            <center>100-5*|3-10|=65</center>
-        </p>
-
-        <img src="{% static "instruction_graph/id_position.png" %}" alt="id_position graph" style="width:50%" >
 
         <h4 class="panel-sub-heading">
            <em> Polls</em>
@@ -103,7 +104,7 @@ img {
 
         <p>
             In the end of each period, elections take place, where each participant may vote or abstain.
-            The winner of the election is determined by simple majority.
+            The winner of the election is determined by simple majority. If the two candidates receive the same number of votes, the winner will be selected randomly.
         </p>
         <p>
             The total payoff to you if a given candidate wins is the sum of his quality and your ‘ideological payoffs’ from the candidate’s victory.
