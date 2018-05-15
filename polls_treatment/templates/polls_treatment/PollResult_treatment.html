@@ -1,4 +1,4 @@
-{% extends "polls_control/Page.html" %}
+{% extends "polls_treatment/Page.html" %}
 {% load staticfiles otree %}
 
 {% block title %}
@@ -15,8 +15,10 @@
     <br>
     <h3 class="center">Poll Results</h3>
     <p class="center">The findings of two companies is revealed:
-    <li>Company 1: {{ group.biased1_k_inpolls }}&#37; for Candidate K; {{ group.biased1_j_inpolls }}&#37; for Candidate J</li>
-    <li>Company 2: {{ group.biased2_k_inpolls }}&#37; for Candidate K; {{ group.biased2_j_inpolls }}&#37; for Candidate J</li>
+    <ul>
+    <li>Company {{ group.biased1_company }}: {{ group.biased1_k_inpolls }}&#37; for Candidate K; {{ group.biased1_j_inpolls }}&#37; for Candidate J.</li>
+    <li>Company {{ group.biased2_company}}: {{ group.biased2_k_inpolls }}&#37; for Candidate K; {{ group.biased2_j_inpolls }}&#37; for Candidate J.</li>
+    </ul>
     </p>
     <button class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
     <br><br>

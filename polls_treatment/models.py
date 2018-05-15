@@ -4,6 +4,7 @@ from otree.api import (
 )
 
 import random
+import numpy as np
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 author = 'Lunzheng Li'
@@ -86,6 +87,8 @@ class Group(BaseGroup):
     Allcompany = models.StringField()# it's actually not needed, I just want to print it out to check
 
     # # # treatment group, select two baised poll, in this case, let's find the poll favours K.
+    biased1_company = models.StringField()
+    biased2_company = models.StringField()
     biased1_k_inpolls = models.FloatField()
     biased1_j_inpolls = models.FloatField()
     biased2_k_inpolls = models.FloatField()
@@ -169,6 +172,36 @@ class Group(BaseGroup):
         self.companyC = ",".join(str(e) for e in companyC)  # actually not needed, to print it out
         self.companyD = ",".join(str(e) for e in companyD)  # actually not needed, to print it out
         self.companyE = ",".join(str(e) for e in companyE)  # actually not needed, to print it out
+
+        list_K= [self.companyA_k_inpolls, self.companyB_k_inpolls, self.companyC_k_inpolls, self.companyD_k_inpolls, self.companyE_k_inpolls,]
+        list_K_sorted = sorted(list_K)
+        list_K_index = np.argsort(list_K)
+        self.biased1_k_inpolls = list_K_sorted[-1]
+        self.biased1_j_inpolls = 100 - self.biased1_k_inpolls
+        self.biased2_k_inpolls = list_K_sorted[-2]
+        self.biased2_j_inpolls = 100 - self.biased2_k_inpolls
+
+        if list_K_index[-1] == 0:
+            self.biased1_company = "A"
+        elif list_K_index[-1] == 1:
+            self.biased1_company = "B"
+        elif list_K_index[-1] == 2:
+            self.biased1_company = "C"
+        elif list_K_index[-1] == 3:
+            self.biased1_company = "D"
+        elif list_K_index[-1] == 4:
+            self.biased1_company = "E"
+
+        if list_K_index[-2] == 0:
+            self.biased2_company = "A"
+        elif list_K_index[-2] == 1:
+            self.biased2_company = "B"
+        elif list_K_index[-2] == 2:
+            self.biased2_company = "C"
+        elif list_K_index[-2] == 3:
+            self.biased2_company = "D"
+        elif list_K_index[-2] == 4:
+            self.biased2_company = "E"
 
     def set_voteresultwaitpage(self):
         players = self.get_players()  # is this return to a list of numbers? No, it seems not. I tried
