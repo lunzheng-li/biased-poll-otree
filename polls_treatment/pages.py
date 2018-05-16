@@ -123,28 +123,28 @@ class TotalPayoff(Page):
         return {
             'total_points': sum(
                 [p.payoff for p in self.player.in_rounds(Constants.practice_rounds + 1, Constants.num_rounds)]),
-            'total_payoff': sum([p.payoff for p in self.player.in_rounds(Constants.practice_rounds + 1,
-                                                                         Constants.num_rounds)]).to_real_world_currency(
-                self.session) + 5,
+            # 'total_payoff': sum([p.payoff for p in self.player.in_rounds(Constants.practice_rounds + 1,
+            #                                                              Constants.num_rounds)]).to_real_world_currency(
+            #     self.session) + 5,
         }
 
 
 page_sequence = [
-    WelcomePage,
-    Introduction,  # remember to add the page in the page sequence.
-    PostPracticeWaitpage,
-    Ideology,
-    Informed,
-    Uninformed,
-    SelectWaitpage,
-    Poll,
-    PollNone,
-    PollWaitpage,
-    PollResult_treatment,
-    Belief,
+    # WelcomePage,
+    # Introduction,  # remember to add the page in the page sequence.
+    # PostPracticeWaitpage,
+    # Ideology,
+    # Informed,
+    # Uninformed,
+    # SelectWaitpage,
+    # Poll,
+    # PollNone,
+    # PollWaitpage,
+    # PollResult_treatment,
+    # Belief,
     Vote,
     VoteWaitpage,
     FinalResult,
-    survey,
+    # survey,
     TotalPayoff,
 ]

@@ -20,7 +20,7 @@ class Constants(BaseConstants):
     name_in_url = 'polls_treatment'
     players_per_group = 5
 
-    num_rounds = 2 # the total number of round, including the practice round.
+    num_rounds = 3 # the total number of round, including the practice round.
     practice_rounds = 1
     real_rounds = num_rounds - practice_rounds
 
@@ -87,12 +87,13 @@ class Group(BaseGroup):
     Allcompany = models.StringField()# it's actually not needed, I just want to print it out to check
 
     # # # treatment group, select two baised poll, in this case, let's find the poll favours K.
-    biased1_company = models.StringField()
+    biased1_company = models.StringField() # the company name of the most biased (toward K) company
     biased2_company = models.StringField()
     biased1_k_inpolls = models.FloatField()
     biased1_j_inpolls = models.FloatField()
     biased2_k_inpolls = models.FloatField()
     biased2_j_inpolls = models.FloatField()
+
 
     def set_pollwaitpage(self):
         Allcompany_lst = [int(e) for e in self.Allcompany.split(",")]
@@ -229,6 +230,13 @@ class Group(BaseGroup):
         else:
             self.k_inelection = self.j_inelection = 0
 
+        # # # to cope with the payoff issue.
+        if self.round_number == Constants.num_rounds:
+            for player in players:
+                player.total_payoffs = sum([p.payoff for p in player.in_rounds(Constants.practice_rounds + 1,
+                                                                         Constants.num_rounds)]).to_real_world_currency(
+                self.session) + 5
+
 
      # # # define the display of round numbers
     def set_practice_round_numbers(self):
@@ -274,5 +282,8 @@ class Player(BasePlayer):
                                          'more than £100,000'],
                                 widget=widgets.RadioSelect
                                 )
+
+    # # # try to resolve the total payoff issue
+    total_payoffs = models.FloatField() # note that it's a little bit different from the var in page.py
 
     pass

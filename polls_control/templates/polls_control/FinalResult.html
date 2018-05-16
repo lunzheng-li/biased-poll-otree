@@ -14,8 +14,12 @@
     {% endif %}
     <br>
     <h3>Election results and Payoffs</h3>
-    <p class="center"><ul><li>{{ group.j_inelection }}&#37; &nbsp;               voted for Candidate J</li>
-    <li>{{ group.k_inelection }}&#37;  &nbsp;              voted for Candidate K</li></ul></p>
+    <p class="center">
+    <ul>
+        <li>{{ group.k_inelection }}&#37;  &nbsp;              voted for Candidate K</li>
+        <li>{{ group.j_inelection }}&#37; &nbsp;               voted for Candidate J</li>
+    </ul>
+    </p>
     <p class="center"><strong>Candidate {{ group.winner }}</strong> wins <br>
     Your points earned in this round: <strong>{{ player.payoff }}</strong></p>
 
