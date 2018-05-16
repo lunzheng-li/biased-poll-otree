@@ -91,7 +91,7 @@ class TotalPayoff(Page):
     def vars_for_template(self):
         return {
             'total_points': sum([p.payoff for p in self.player.in_rounds(Constants.practice_rounds +1, Constants.num_rounds )]),
-            'total_payoff': sum([p.payoff for p in self.player.in_rounds(Constants.practice_rounds +1, Constants.num_rounds )]).to_real_world_currency(self.session) + 5,
+            # 'total_payoff': sum([p.payoff for p in self.player.in_rounds(Constants.practice_rounds +1, Constants.num_rounds )]).to_real_world_currency(self.session) + 5,
         }
 
 
