@@ -18,9 +18,9 @@ This is the treatment group.
 
 class Constants(BaseConstants):
     name_in_url = 'polls_treatment'
-    players_per_group = 15
+    players_per_group = 5
 
-    num_rounds = 6 # the total number of round, including the practice round.
+    num_rounds = 2 # the total number of round, including the practice round.
     practice_rounds = 1
     real_rounds = num_rounds - practice_rounds
 
