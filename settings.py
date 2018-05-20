@@ -15,7 +15,7 @@ if environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
 else:
     DEBUG = True
 
-SENTRY_DSN = 'http://01b52db0653d4c80bbfea86a65add259:0cfd52b438064c0e89de041f8c37640c@sentry.otree.org/327'
+# SENTRY_DSN = 'http://01b52db0653d4c80bbfea86a65add259:0cfd52b438064c0e89de041f8c37640c@sentry.otree.org/327'
 
 ADMIN_USERNAME = 'admin'
 
