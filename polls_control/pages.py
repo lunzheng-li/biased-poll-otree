@@ -96,18 +96,18 @@ class TotalPayoff(Page):
 
 
 page_sequence = [
-    WelcomePage,
-    Introduction, # remember to add the page in the page sequence.
-    PostPracticeWaitpage,
-    Ideology,
-    Informed,
-    Uninformed,
-    SelectWaitpage,
-    Poll,
-    PollNone,
-    PollWaitpage,
-    PollResult,
-    Belief,
+    # WelcomePage,
+    # Introduction, # remember to add the page in the page sequence.
+    # PostPracticeWaitpage,
+    # Ideology,
+    # Informed,
+    # Uninformed,
+    # SelectWaitpage,
+    # Poll,
+    # PollNone,
+    # PollWaitpage,
+    # PollResult,
+    # Belief,
     Vote,
     VoteWaitpage,
     FinalResult,

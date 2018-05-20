@@ -46,6 +46,7 @@ class Subsession(BaseSubsession):
         for player in self.get_players():
             player.id_position = id_list[0]
             del id_list[0] # what's cool is that the old index 1 become 0 now.
+            player.poll_display_order = random.randint(0,1)
 
         for group in self.get_groups(): # it works if we have multiple groups.
             group.quality_J = random.randint(1, 120)
@@ -257,5 +258,8 @@ class Player(BasePlayer):
 
     # # # try to resolve the total payoff issue
     total_payoffs = models.FloatField() # note that it's a little bit different from the var in page.py
+
+    # # # in the poll result page, random order of K, J display across subjects
+    poll_display_order = models.IntegerField() # if this var = 0, K before J; if this var = 1, J before K.
 
     pass

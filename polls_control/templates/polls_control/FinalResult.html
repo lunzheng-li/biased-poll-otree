@@ -20,6 +20,9 @@
         <li>{{ group.j_inelection }}&#37; &nbsp;               voted for Candidate J</li>
     </ul>
     </p>
+    {% if group.k_inelection == group.j_inelection %}
+    <p class="center">Candidates received the same number of votes, the winner is selected randomly</p>
+    {% endif %}
     <p class="center"><strong>Candidate {{ group.winner }}</strong> wins <br>
     Your points earned in this round: <strong>{{ player.payoff }}</strong></p>
 

@@ -16,6 +16,7 @@
     <br>
     <h3 class="center">Poll Results</h3>
     <p class="center">The results of the voting intention polls for all companies are as follows:
+    {% if player.poll_display_order == 0 %}
     <ul>
     <li>Company A: {{ group.companyA_k_inpolls }}&#37; for Candidate K; {{ group.companyA_j_inpolls }}&#37; for Candidate J.</li>
     <li>Company B: {{ group.companyB_k_inpolls }}&#37; for Candidate K; {{ group.companyB_j_inpolls }}&#37; for Candidate J.</li>
@@ -23,7 +24,17 @@
     <li>Company D: {{ group.companyD_k_inpolls }}&#37; for Candidate K; {{ group.companyD_j_inpolls }}&#37; for Candidate J.</li>
     <li>Company E: {{ group.companyE_k_inpolls }}&#37; for Candidate K; {{ group.companyE_j_inpolls }}&#37; for Candidate J.</li>
     </ul>
+    {% else %}
+        <ul>
+    <li>Company A: {{ group.companyA_j_inpolls }}&#37; for Candidate J; {{ group.companyA_k_inpolls }}&#37; for Candidate K.</li>
+    <li>Company B: {{ group.companyB_j_inpolls }}&#37; for Candidate J; {{ group.companyB_k_inpolls }}&#37; for Candidate K.</li>
+    <li>Company C: {{ group.companyC_j_inpolls }}&#37; for Candidate J; {{ group.companyC_k_inpolls }}&#37; for Candidate K.</li>
+    <li>Company D: {{ group.companyD_j_inpolls }}&#37; for Candidate J; {{ group.companyD_k_inpolls }}&#37; for Candidate K.</li>
+    <li>Company E: {{ group.companyE_j_inpolls }}&#37; for Candidate J; {{ group.companyE_k_inpolls }}&#37; for Candidate K.</li>
+    </ul>
+    {% endif %}
     </p>
+        <p align="right"> <strong>Please click "Next" to continue </strong></p>
     <button class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
     <br><br>
     {% include Constants.instructions_template %}

@@ -15,11 +15,20 @@
     <br>
     <h3 class="center">Poll Results</h3>
     <p class="center">The findings of two companies is revealed:
+    {%  if player.poll_display_order == 0 %}
     <ul>
     <li>Company {{ group.biased1_company }}: {{ group.biased1_k_inpolls }}&#37; for Candidate K; {{ group.biased1_j_inpolls }}&#37; for Candidate J.</li>
     <li>Company {{ group.biased2_company}}: {{ group.biased2_k_inpolls }}&#37; for Candidate K; {{ group.biased2_j_inpolls }}&#37; for Candidate J.</li>
     </ul>
+    {% else %}
+        <ul>
+    <li>Company {{ group.biased1_company }}: {{ group.biased1_j_inpolls }}&#37; for Candidate J; {{ group.biased1_k_inpolls }}&#37; for Candidate K.</li>
+    <li>Company {{ group.biased2_company }}: {{ group.biased2_j_inpolls }}&#37; for Candidate J; {{ group.biased2_k_inpolls }}&#37; for Candidate K.</li>
+    </ul>
+    {% endif %}
     </p>
+     <p align="right"> <strong>Please click "Next" to continue </strong></p>
+
     <button class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
     <br><br>
     {% include Constants.instructions_template %}
