@@ -122,13 +122,13 @@ SESSION_CONFIGS = [
     #     'num_demo_participants': 2,
     #     'app_sequence': ['my_trust'],
     # },
-    {
-        'name': 'polls',
-        'display_name': "simple poll",
-        'num_demo_participants': 5,
-        'app_sequence': ['polls'],
-        'real_world_currency_per_point': 0.01
-    },
+    # {
+    #     'name': 'polls',
+    #     'display_name': "simple poll",
+    #     'num_demo_participants': 5,
+    #     'app_sequence': ['polls'],
+    #     'real_world_currency_per_point': 0.01
+    # },
     {
         'name': 'polls_treatment',
         'display_name': "Treatment",
