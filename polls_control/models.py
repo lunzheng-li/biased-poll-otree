@@ -226,7 +226,7 @@ class Player(BasePlayer):
 
     id_position = models.IntegerField()
     poll = models.StringField(
-        choices=['K', 'J','Prefer not to participate'],
+        choices=['K', 'J','Prefer not to participate in the Poll'],
         widget=widgets.RadioSelect,
     )
     vote = models.StringField(
