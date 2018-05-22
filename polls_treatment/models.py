@@ -20,8 +20,8 @@ class Constants(BaseConstants):
     name_in_url = 'polls_treatment'
     players_per_group = 5
 
-    num_rounds = 2 # the total number of round, including the practice round.
-    practice_rounds = 1
+    num_rounds = 3 # the total number of round, including the practice round.
+    practice_rounds = 2
     real_rounds = num_rounds - practice_rounds
 
     poll_num = 4  # each company select poll_num of participants
@@ -253,11 +253,11 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     id_position = models.IntegerField()
     poll = models.StringField(
-        choices=['J', 'K', 'Prefer not to answer'],
+        choices=['K', 'J', 'Prefer not to participate'],
         widget=widgets.RadioSelect,
     )
     vote = models.StringField(
-        choices=['J', 'K', 'Abstain'],
+        choices=['K', 'J', 'Abstain'],
         widget=widgets.RadioSelect,
     )
 
