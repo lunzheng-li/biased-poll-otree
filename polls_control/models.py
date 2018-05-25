@@ -22,7 +22,7 @@ class Constants(BaseConstants):
     players_per_group = 5
 
     num_rounds = 4 # the total number of round, including the practice round.
-    practice_rounds = 2
+    practice_rounds = 3
     real_rounds = num_rounds - practice_rounds
 
     poll_num = 4  # each company select poll_num of participants
