@@ -15,6 +15,10 @@ img {
                 <h2 class="panel-sub-heading" align="center">
             <em>Instructions</em>
         </h2>
+        <p>
+            In this study you will be interacting with a fixed group of fourteen other participants for a number of rounds.
+            In each round, the fifteen participants will have the opportunity to vote in an election.
+        </p>
 
         <p>
             The study will consist of 3 practice rounds and 15 regular decision-making rounds.
@@ -38,18 +42,39 @@ img {
         </em>
         </p>
 
+         <h4 class="panel-sub-heading">
+            <em>Ideological Positions</em>
+        </h4>
+
+        <p>
+            At the start of each period you will be given a ‘position number’ between 1 and 15.
+            This number affects how you value the positions of the two candidates.
+            Candidate of Party J is in position 6 and candidate of Party K is in position 10.
+            These positions remain fixed for both candidates for the entirety of the study, but your position may change every period.
+        </p>
+        <p>
+            In any given round, each of the 15 participants in your group takes a different position.
+            So, every round some participant takes position 1, another participant takes position 2, another participant takes position 3, and so on, up to position 15.
+            The distribution of participants to positions changes every round.
+        </p>
+        <p>
+            Your ‘ideological score’ from the victory of each candidate is equal to 100 points minus 5 times the
+            difference between your position and the candidate’s position.
+        </p>
+
         <h4 class="panel-sub-heading">
             <em>Candidate Quality</em>
         </h4>
 
         <p>
-            For each candidate a random number is drawn from an urn.
-            The numbers in the urn are between 1 and 120 and each is equally likely to be selected.
+           For each of the two candidates an integer number has been randomly drawn for every round.
+            The possible values that this number can take are between 1 and 120 and each number is equally likely to be selected.
             This ‘quality number’ reflects the competency of the candidate in handling policy matters.
-            The higher is the number the better is the quality of the candidate.
+            The higher the number is the better the quality of the candidate is.
         </p>
         <p>
-            This number is redrawn every period for each candidate.
+            A new quality number was randomly redrawn every period for each candidate.
+            Only some participants in each round will have the opportunity to learn its value.
         </p>
 
         <h4 class="panel-sub-heading">
@@ -66,27 +91,26 @@ img {
             Participants with positions {4,6,8,10,12,13,14,15} are uninformed.
             This fact does not change across rounds.
         </p>
-      <h4 class="panel-sub-heading">
-            <em>Ideological Positions and Payoffs</em>
-        </h4>
 
+        <h4 class="panel-sub-heading">
+            <em>Payoff Example</em>
+        </h4>
         <p>
-            At the start of each period you will be given a ‘position number’ between 1 and 15.
-            This number affects how you value the positions of the two candidates.
-            Candidate of Party J is in position 6 and candidate of Party K is in position 10.
-            These positions remain fixed for both candidates for the entirety of the study, but your position may change every period.
+            For example, assume that in a particular round you are in position 3, K’s quality in this round is 75 and J’s quality in this round is 13.
+            Since candidate K takes position 10, your ‘ideological payoff’ from K’s victory in this round is:
+             <center>100-5*|3-10|=65</center>
         </p>
         <p>
-            Your ‘ideological score’ from the victory of each candidate is equal to 100 points minus 5 times the difference between your position and the candidate’s position.
+            You also earn an additional score equal to the winner’s quality. So, if candidate K wins the election then your total payoff is:
+                 <center> 65+75=140</center>
         </p>
         <p>
-            For example, if you are in position 3, and candidate K takes position 10, then your ‘ideological payoff’ from K’s victory is:
-            <center>100-5*|3-10|=65</center>
+            On the other hand, Candidate J has position 6. Then, if candidate J wins the election then your total payoff is:
+                    <center>100-5*|3-6|+13= 85+13=98</center>
         </p>
         <p>
-            Note that, on top of this ideological score, you earn an additional score equal to the winner’s quality.
-            For instance, if candidate K wins the election and his quality is 25, then your total payoff is:
-            <center>65+25=90 </center>
+            Please notice that if the difference in the quality between the two candidates in a given round is greater than 20,
+            then you will always receive a higher payoff if the candidate with the higher quality wins, regardless of your ideological position.
         </p>
         <img src="{% static "instruction_graph_t/id_position_t.png" %}" alt="id_position graph" style="width:70%" >
 
@@ -115,10 +139,10 @@ img {
             <em>Information about Poll Results</em>
         </h4>
 
-        <p>
-            After polls have taken place, the findings of two companies will be revealed.
+        <p><strong> After polls have taken place, the findings of two companies will be revealed.
             All participants will observe the fraction of votes that each of the two candidates received in the polls of
-            these two companies.
+            these two companies.</strong>
+
         </p>
         <h4 class="panel-sub-heading">
             <em>Beliefs about Election Results</em>

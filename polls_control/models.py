@@ -29,6 +29,9 @@ class Constants(BaseConstants):
 
     instructions_template = 'polls_control/Instructions.html' # everytime when adding a var in model.py, reset the database.
 
+    V_K = [68, 101, 19, 94, 73, 1, 65, 109, 23, 41, 78, 71, 104, 112, 82, 113, 119, 113,]
+    V_J = [104, 100, 96, 37, 94, 37, 94, 45, 43, 76, 108, 19, 44, 84, 75, 1, 15, 96, 74, 4,]
+
     pass
 
 
@@ -49,8 +52,8 @@ class Subsession(BaseSubsession):
             player.poll_display_order = random.randint(0,1)
 
         for group in self.get_groups(): # it works if we have multiple groups.
-            group.quality_J = random.randint(1, 120)
-            group.quality_K = random.randint(1, 120)
+            group.quality_J = Constants.V_J[self.round_number - 1]
+            group.quality_K = Constants.V_K[self.round_number - 1]
             group.Allcompany = ",".join(str(e) for e in Allcompany)
 
 
