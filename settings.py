@@ -132,14 +132,14 @@ SESSION_CONFIGS = [
     {
         'name': 'polls_treatment',
         'display_name': "Treatment",
-        'num_demo_participants': 5,
+        'num_demo_participants': 15,
         'app_sequence': ['polls_treatment'],
         'real_world_currency_per_point': 0.005
     },
         {
         'name': 'polls_control',
         'display_name': "Control",
-        'num_demo_participants': 5,
+        'num_demo_participants': 15,
         'app_sequence': ['polls_control'],
         'real_world_currency_per_point': 0.005
     },
