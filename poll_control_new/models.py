@@ -189,7 +189,7 @@ class Group(BaseGroup):
 
 
         # no bias here, let's pick random two polls from the five companies'
-        random_companies = random.sample(['A', 'B', 'C', 'D', 'E'], 2)
+        random_companies = sorted(random.sample(['A', 'B', 'C', 'D', 'E'], 2))
         self.random1_company = random_companies[0]
         self.random2_company = random_companies[1]
 
