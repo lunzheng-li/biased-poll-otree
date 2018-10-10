@@ -1,0 +1,185 @@
+
+{% load otree static %}
+<style>
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+
+<div class="instructions well well-lg">
+
+
+    <div class="panel-body">
+                <h2 class="panel-sub-heading" align="center">
+            <em>Instructions</em>
+        </h2>
+        <p>
+            In this study you will be interacting with a fixed group of fourteen other participants for a number of rounds.
+            In each round, the fifteen participants will have the opportunity to vote in an election.
+        </p>
+
+        <p>
+            The study will consist of 3 practice rounds and 15 regular decision-making rounds.
+            Your performance in the regular rounds counts towards your final earned amount, while practice rounds do not count.
+        </p>
+        <p>
+            For each round, the sequence of actions is illustrated below.
+            In every step, new information will appear at the top of the screen, so please have a look at it carefully
+            before you make any decision or proceed to the next step.
+        </p>
+
+        <img src="{% static "instruction_graph_c/sequence_c.PNG" %}" alt="treatment sequence" style="width:90%;">
+
+        <p>
+            In each period, you will have the opportunity to vote in an election.
+            One candidate is of PARTY K and the other one is of PARTY J.
+        </p>
+        <p><em>
+            Your payoff in each round will depend on the distance of your ideological position from
+            the ideological position of the election winner and on the quality of the election winner.
+        </em>
+        </p>
+
+         <h4 class="panel-sub-heading">
+            <em>Ideological Positions</em>
+        </h4>
+
+        <p>
+          At the start of each period you will be given a ‘position number’ between 1 and 15.
+            This number affects how you value the positions of the two candidates.
+            The candidate of Party J is in position 6 and the candidate of Party K is in position 10.
+            These positions remain fixed for both candidates for the entirety of the study, but your position may change every period.
+        </p>
+        <p>
+            In any given round, each of the 15 participants in your group takes a different position.
+            So, every round some participant takes position 1, another participant takes position 2, another participant takes position 3, and so on, up to position 15.
+            The distribution of participants to positions changes every round.
+        </p>
+        <p>
+            Your ‘ideological score’ from the victory of each candidate is equal to 100 points minus 5 times the
+            difference between your position and the candidate’s position.
+        </p>
+
+        <h4 class="panel-sub-heading">
+            <em>Candidate Quality</em>
+        </h4>
+
+        <p>
+           For each of the two candidates an integer number has been randomly drawn for every round.
+            The possible values that this number can take are between 1 and 120 and each number is equally likely to be selected.
+            This ‘quality number’ reflects the competency of the candidate in handling policy matters.
+            The higher the number is the better the quality of the candidate is.
+        </p>
+        <p>
+            A new quality number was randomly redrawn every period for each candidate.
+            Only some participants in each round will have the opportunity to learn its value.
+        </p>
+
+        <h4 class="panel-sub-heading">
+            <em>Informed and Uninformed Participants</em>
+        </h4>
+
+        <p>
+          In every round some participants are told the quality numbers that have been drawn for the two candidates,
+            e.g. “Candidate J’s quality is 100 and candidate K’s quality is 24.” These are the informed participants.
+            The rest of the participants receive no additional information. Who receives this information is determined by the ideological positions.
+        </p>
+        <p>
+            Participants with positions {1,2,3,5,7,9,11} are informed.
+            Participants with positions {4,6,8,10,12,13,14,15} are uninformed.
+            This fact does not change across rounds.
+        </p>
+
+        <h4 class="panel-sub-heading">
+            <em>Payoff Example</em>
+        </h4>
+        <p>
+            For example, assume that in a particular round you are in position 3, K’s quality in this round is 75 and J’s quality in this round is 13.
+            Since candidate K takes position 10, your ‘ideological payoff’ from K’s victory in this round is:
+             <center>100-5*|3-10|=65</center>
+        </p>
+        <p>
+            You also earn an additional score equal to the winner’s quality. So, if candidate K wins the election then your total payoff is:
+                 <center> 65+75=140</center>
+        </p>
+        <p>
+            On the other hand, Candidate J has position 6. Then, if candidate J wins the election then your total payoff is:
+                    <center>100-5*|3-6|+13= 85+13=98</center>
+        </p>
+        <p>
+            Please notice that if the difference in the quality between the two candidates in a given round is greater than 20,
+            then you will always receive a higher payoff if the candidate with the higher quality wins, regardless of your ideological position.
+        </p>
+        <img src="{% static "instruction_graph_c/id_position_c.png" %}" alt="id_position graph" style="width:70%" >
+
+
+
+
+
+        <h4 class="panel-sub-heading">
+           <em> Polls</em>
+        </h4>
+
+        <p>
+            After the ‘informed voters’ receive their information, five polling companies will conduct voting intention polls.
+            In each poll, four out of the fifteen participants will be randomly chosen to state their voting preferences.
+        </p>
+        <p>
+            <em>
+                This means that you may be asked to state your voting intention by one polling company, or by many, or by none.
+            </em>
+        </p>
+        <p>
+            If you are contacted by many companies, you only have to state your answer once, and the same answer will be used for all of them.
+        </p>
+        <p>
+            Notice that at the time that polls take place,
+            seven voters are informed of the actual quality of the two candidates in the forthcoming election and eight voters are uninformed.
+        </p>
+
+        <h4 class="panel-sub-heading">
+            <em>Information about Poll Results</em>
+        </h4>
+
+        <p>After polls have taken place, the findings of the five companies will be revealed.
+            All participants will observe the fraction of votes that each of the two candidates received in the polls of these five companies.
+
+        </p>
+        <h4 class="panel-sub-heading">
+            <em>Beliefs about Election Results</em>
+        </h4>
+        <p>
+            After the poll results have been announced to you, and before elections take place,
+            you will be asked to state the vote share that you expect each candidate to receive in the upcoming elections.
+        </p>
+
+        <h4 class="panel-sub-heading">
+            <em>Elections and Payoffs</em>
+        </h4>
+
+        <p>
+            In the end of each period, elections take place, where each participant may vote or abstain.
+            The winner of the election is determined by simple majority. In case of a draw, each candidate receives an equal chance of being selected as the winner.
+        </p>
+
+        <h4 class="panel-sub-heading">
+            <em>Round Payoffs and Aggregate Payoffs from the Study</em>
+        </h4>
+
+        <p>
+            As described earlier, your total payoff from each round is the sum of the winner’s quality and your ‘ideological payoffs’ from the candidate’s victory.
+        </p>
+        <p>
+            <em>
+                Your total payoffs from this study will be the sum of all payoffs that you accumulate in each of the 15 regular rounds, plus your participation fee.
+            </em>
+        </p>
+        <p>
+            They will be paid to you in cash, at the end of the study. Each earned point will correspond to <strong>half a penny</strong>.
+            You will now participate in three practice rounds.
+            If you have any questions, please raise your hand and your question will be addressed individually.
+        </p>
+    </div>
+</div>
