@@ -27,7 +27,7 @@ We should modify the treatment app
 
 class Constants(BaseConstants):
     name_in_url = 'poll_control_new'
-    players_per_group = 5
+    players_per_group = 15
 
     num_rounds = 18 # the total number of round, including the practice round.
     practice_rounds = 3

@@ -146,7 +146,7 @@ SESSION_CONFIGS = [
     {
         'name': 'poll_control_new',
         'display_name': "Control_new",
-        'num_demo_participants': 5,
+        'num_demo_participants': 15,
         'app_sequence': ['poll_control_new'],
         'real_world_currency_per_point': 0.005
     },
