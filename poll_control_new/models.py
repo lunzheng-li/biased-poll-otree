@@ -27,10 +27,10 @@ We should modify the treatment app
 
 class Constants(BaseConstants):
     name_in_url = 'poll_control_new'
-    players_per_group = 15
+    players_per_group = 5
 
-    num_rounds = 18 # the total number of round, including the practice round.
-    practice_rounds = 3
+    num_rounds = 3 # the total number of round, including the practice round.
+    practice_rounds = 1
     real_rounds = num_rounds - practice_rounds
 
     poll_num = 4  # each company select poll_num of participants
@@ -256,8 +256,7 @@ class Group(BaseGroup):
         if self.round_number == Constants.num_rounds:
             for player in players:
                 player.total_payoffs = sum([p.payoff for p in player.in_rounds(Constants.practice_rounds + 1,
-                                                                         Constants.num_rounds)]).to_real_world_currency(
-                self.session) + 5
+                                                                         Constants.num_rounds)])/200 + 5
 
 
 
@@ -309,7 +308,11 @@ class Player(BasePlayer):
     )
 
     # # # try to resolve the total payoff issue
-    total_payoffs = models.FloatField() # note that it's a little bit different from the var in page.py
+    total_payoffs = models.FloatField()# note that it's a little bit different from the var in page.py
+
+    # 17/10/2018 20:13, TypeError: FloatField should be set to float, not RealWorldCurrency.
+    # how about we simply change the total_payoffs to a currency field
+    # not sure how this Currency Field behavior, let's go back to FloatField?
 
     # # # in the poll result page, random order of K, J display across subjects
     poll_display_order = models.IntegerField() # if this var = 0, K before J; if this var = 1, J before K.
