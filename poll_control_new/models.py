@@ -255,8 +255,8 @@ class Group(BaseGroup):
         # # # to cope with the payoff issue.
         if self.round_number == Constants.num_rounds:
             for player in players:
-                player.total_payoffs = (sum([p.payoff for p in player.in_rounds(Constants.practice_rounds + 1,
-                                                                         Constants.num_rounds)])+ c(1000)).to_real_world_currency(self.session)
+                player.total_payoffs = sum([p.payoff for p in player.in_rounds(Constants.practice_rounds + 1,
+                                                                         Constants.num_rounds)]).to_real_world_currency()
 
 
 
