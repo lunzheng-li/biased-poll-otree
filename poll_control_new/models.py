@@ -254,12 +254,12 @@ class Group(BaseGroup):
             self.k_inelection = self.j_inelection = 0
 
         # # # to cope with the payoff issue.
-        # if self.round_number == Constants.num_rounds:
-        #     for player in players:
-        #         player.total_payoffs = sum([p.payoff for p in player.in_rounds(Constants.practice_rounds + 1,Constants.num_rounds)]).to_real_world_currency(self.session)
+        if self.round_number == Constants.num_rounds:
+            for player in players:
+                player.total_payoffs = float(sum([p.payoff for p in player.in_rounds(Constants.practice_rounds + 1,Constants.num_rounds)])) + 5
 
-        if self.subsession.round_number in Constants.no_paying_rounds:
-            p.payoff = 0
+        # if self.subsession.round_number in Constants.no_paying_rounds:
+        #     p.payoff = 0
 
 
 
@@ -310,12 +310,13 @@ class Player(BasePlayer):
     )
 
     # # # try to resolve the total payoff issue
-    # total_payoffs = models.CurrencyField()# note that it's a little bit different from the var in page.py
+    total_payoffs = models.FloatField()# note that it's a little bit different from the var in page.py
 
     # 17/10/2018 20:13, TypeError: FloatField should be set to float, not RealWorldCurrency.
     # how about we simply change the total_payoffs to a currency field
     # not sure how this Currency Field behavior, let's go back to FloatField
     # ok we should change it back again, since payoff is currencyfield
+    # https: // groups.google.com / forum /  # !msg/otree/1MRfRGtwJR4/6x3LLLA4GAAJ
 
     # # # in the poll result page, random order of K, J display across subjects
     poll_display_order = models.IntegerField() # if this var = 0, K before J; if this var = 1, J before K.

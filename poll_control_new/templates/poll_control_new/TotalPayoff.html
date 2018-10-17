@@ -8,7 +8,7 @@ The Study has finished
 {% block content %}
      <p>Your points from real rounds 1-{{ Constants.real_rounds }} were  {{ total_points }}</p>
     <p>You total payoffs are £(total points)/200 plus your showup fee of £5</p>
-    <p><strong>YOUR TOTAL PAYOFFS:  {{ total_payoffs }} </strong></p>
+    <p><strong>YOUR TOTAL PAYOFFS:  {{ player.total_payoffs }} </strong></p>
     <p>Thank you for having participated in this study.</p>
     <p>Please wait quietly while participants are getting paid.</p>
     {% next_button %}
