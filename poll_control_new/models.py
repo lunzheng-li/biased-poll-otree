@@ -256,7 +256,7 @@ class Group(BaseGroup):
         # # # to cope with the payoff issue.
         if self.round_number == Constants.num_rounds:
             for player in players:
-                player.total_payoffs = float(sum([p.payoff for p in player.in_rounds(Constants.practice_rounds + 1,Constants.num_rounds)])) + 5
+                player.total_payoffs = float(sum([p.payoff for p in player.in_rounds(Constants.practice_rounds + 1,Constants.num_rounds)]))/200 + 5
 
         # if self.subsession.round_number in Constants.no_paying_rounds:
         #     p.payoff = 0
