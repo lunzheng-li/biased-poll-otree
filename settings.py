@@ -59,7 +59,7 @@ AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'GBP'
 USE_POINTS = True
-
+REAL_WORLD_CURRENCY_DECIMAL_PLACES = 2
 
 # e.g. en, de, fr, it, ja, zh-hans
 # see: https://docs.djangoproject.com/en/1.9/topics/i18n/#term-language-code
@@ -148,7 +148,8 @@ SESSION_CONFIGS = [
         'display_name': "Control_new",
         'num_demo_participants': 5,
         'app_sequence': ['poll_control_new'],
-        'real_world_currency_per_point': 0.005
+        'real_world_currency_per_point': 0.005,
+
     },
 ]
 
