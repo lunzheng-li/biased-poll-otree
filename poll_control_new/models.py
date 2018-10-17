@@ -29,9 +29,9 @@ class Constants(BaseConstants):
     name_in_url = 'poll_control_new'
     players_per_group = 5
 
-    num_rounds = 2 # the total number of round, including the practice round.
+    num_rounds = 3 # the total number of round, including the practice round.
     practice_rounds = 1
-    no_paying_rounds = list(range(1, practice_rounds+1))
+    # no_paying_rounds = list(range(1, practice_rounds+1))
     real_rounds = num_rounds - practice_rounds
 
     poll_num = 4  # each company select poll_num of participants
