@@ -27,7 +27,7 @@ We should modify the treatment app
 
 class Constants(BaseConstants):
     name_in_url = 'poll_control_new'
-    players_per_group = 15
+    players_per_group = 5
 
     num_rounds = 18 # the total number of round, including the practice round.
     practice_rounds = 3
@@ -256,7 +256,7 @@ class Group(BaseGroup):
         # # # to cope with the payoff issue.
         if self.round_number == Constants.num_rounds:
             for player in players:
-                player.total_payoffs = float(sum([p.payoff for p in player.in_rounds(Constants.practice_rounds + 1,Constants.num_rounds)]))/200 + 5
+                player.total_payoffs = round(float(sum([p.payoff for p in player.in_rounds(Constants.practice_rounds + 1,Constants.num_rounds)]))/200 + 5, 2)
 
         # if self.subsession.round_number in Constants.no_paying_rounds:
         #     p.payoff = 0
