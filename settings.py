@@ -158,7 +158,7 @@ SESSION_CONFIGS = [
         'name': 'polls_treatment_new',
         'display_name': "Treatment_new",
         'num_demo_participants': 15,
-        'app_sequence': ['poll_control_new'],
+        'app_sequence': ['polls_treatment_new'],
         'real_world_currency_per_point': 0.005,
 
     },
