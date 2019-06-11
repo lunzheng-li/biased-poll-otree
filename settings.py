@@ -71,8 +71,8 @@ INSTALLED_APPS = ['otree']
 # SENTRY_DSN = ''
 
 DEMO_PAGE_INTRO_HTML = """
-Treatment: 2 out of 5, biased. 
 Control: 5 all. 
+<b>Treatment</b>: 2 out of 5, biased. 
 Control_new: 2 out of 5, random.
 Treatment_new: 2 out of 5, biased mechanism revealed.
 """
@@ -133,17 +133,17 @@ SESSION_CONFIGS = [
     #     'real_world_currency_per_point': 0.01
     # },
     {
-        'name': 'polls_treatment',
-        'display_name': "Treatment",
-        'num_demo_participants': 15,
-        'app_sequence': ['polls_treatment'],
-        'real_world_currency_per_point': 0.005
-    },
-        {
         'name': 'polls_control',
         'display_name': "Control",
         'num_demo_participants': 15,
         'app_sequence': ['polls_control'],
+        'real_world_currency_per_point': 0.005
+    },
+    {
+        'name': 'polls_treatment',
+        'display_name': "Treatment",
+        'num_demo_participants': 15,
+        'app_sequence': ['polls_treatment'],
         'real_world_currency_per_point': 0.005
     },
     {
