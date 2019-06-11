@@ -151,6 +151,15 @@ SESSION_CONFIGS = [
         'real_world_currency_per_point': 0.005,
 
     },
+    {
+        'name': 'polls_treatment_new',
+        'display_name': "Treatment_new",
+        'num_demo_participants': 15,
+        'app_sequence': ['poll_control_new'],
+        'real_world_currency_per_point': 0.005,
+
+    },
+]
 ]
 
 # anything you put after the below line will override

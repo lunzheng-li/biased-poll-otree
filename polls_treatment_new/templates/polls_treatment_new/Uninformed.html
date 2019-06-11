@@ -1,0 +1,22 @@
+{% extends "polls_treatment_new/Page.html" %}
+{% load staticfiles otree %}
+
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+      {% if group.round_number <= Constants.practice_rounds  %}
+
+    <p><ins>Practice round {{ group.round_number}} of {{ Constants.practice_rounds }}</ins></p>
+    {% else %}
+    <p><ins>Round {{ group.set_practice_round_numbers}} of {{ Constants.real_rounds}}</ins></p>
+    {% endif %}
+    <br>
+    <h3 class="center">Candidate Quality</h3>
+    <p class="center">For this period you will be <strong>uninformed</strong> of the quality values of the two candidates.</p>
+    <button class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
+    <br><br> <br><br> <br><br> <br><br>
+    {% include Constants.instructions_template %}
+{% endblock %}

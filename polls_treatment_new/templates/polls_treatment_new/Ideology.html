@@ -1,0 +1,22 @@
+{% extends "polls_treatment_new/Page.html" %}
+{% load staticfiles otree %}
+
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    {% if group.round_number <= Constants.practice_rounds  %}
+    <!--<p>This is a practice round, and it will not count for your final payoffs</p>-->
+    <p><ins>Practice round {{ group.round_number}} of {{ Constants.practice_rounds }}</ins></p>
+    {% else %}
+    <p><ins>Round {{ group.set_practice_round_numbers}} of {{ Constants.real_rounds}}</ins></p>
+    {% endif %}
+    <br>
+    <h3 class="center">Ideological Positions</h3>
+    <p class="center">Your position for this round is <strong>position {{ player.id_position }}</strong>. </p>
+    <button class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
+    <br><br> <br><br> <br><br> <br><br>
+    {% include Constants.instructions_template %}
+{% endblock %}

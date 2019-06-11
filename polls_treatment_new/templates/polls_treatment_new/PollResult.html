@@ -1,0 +1,32 @@
+{% extends "polls_treatment_new/Page.html" %}
+{% load staticfiles otree %}
+
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+     {% if group.round_number <= Constants.practice_rounds  %}
+
+    <p><ins>Practice round {{ group.round_number}} of {{ Constants.practice_rounds }}</ins></p>
+    {% else %}
+    <p><ins>Round {{ group.set_practice_round_numbers}} of {{ Constants.real_rounds}}</ins></p>
+    {% endif %}
+    <br>
+    <h3 class="center">Poll Results</h3>
+    <p class="center">The results of the voting intention polls for all companies are as follows:
+    <ul>
+    <li>Company A: {{ group.companyA_k_inpolls }}&#37; for Candidate K; {{ group.companyA_j_inpolls }}&#37; for Candidate J &lt;{{ group.companyA }}</li>
+    <li>Company B: {{ group.companyB_k_inpolls }}&#37; for Candidate K; {{ group.companyB_j_inpolls }}&#37; for Candidate J &lt;{{ group.companyB }}</li>
+    <li>Company C: {{ group.companyC_k_inpolls }}&#37; for Candidate K; {{ group.companyC_j_inpolls }}&#37; for Candidate J &lt;{{ group.companyC }}</li>
+    <li>Company D: {{ group.companyD_k_inpolls }}&#37; for Candidate K; {{ group.companyD_j_inpolls }}&#37; for Candidate J &lt;{{ group.companyD }}</li>
+    <li>Company E: {{ group.companyE_k_inpolls }}&#37; for Candidate K; {{ group.companyE_j_inpolls }}&#37; for Candidate J &lt;{{ group.companyE }}</li>
+    </ul>
+    </p>
+    please click "Next" to continue
+    <button class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
+    <br><br> <br><br> <br><br> <br><br>
+    {% include Constants.instructions_template %}
+
+{% endblock %}
