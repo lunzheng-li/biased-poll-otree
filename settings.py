@@ -71,7 +71,10 @@ INSTALLED_APPS = ['otree']
 # SENTRY_DSN = ''
 
 DEMO_PAGE_INTRO_HTML = """
-oTree games
+Treatment: 2 out of 5, biased. 
+Control: 5 all. 
+Control_new: 2 out of 5, random.
+Treatment_new: 2 out of 5, biased mechanism revealed.
 """
 
 mturk_hit_settings = {
