@@ -9,3 +9,8 @@ _bots*s
 __temp*
 __pycache__/
 *.py[cod]
+Li_survey/
+my_matching_pennies/
+my_public_goods/
+my_trust/
+.DS_Store
